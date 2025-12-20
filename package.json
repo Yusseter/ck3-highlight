@@ -1,0 +1,26 @@
+{
+  "name": "ybck3",
+  "displayName": "ck3-highlight",
+  "description": "Syntax highlighting for Crusader Kings III script files",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "ck3",
+      "aliases": ["Crusader Kings III", "ck3"],
+      "extensions": [".txt",".gui",".map",".asset",".mod",".info",".shortcuts",".settings"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "ck3",
+      "scopeName": "source.paradox.ck3",
+      "path": "./syntaxes/ck3.tmLanguage.json"
+    }]
+  },
+	"main": "./src/extension.js"
+}
