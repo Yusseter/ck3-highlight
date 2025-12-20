@@ -1,26 +1,69 @@
 {
-  "name": "ybck3",
-  "displayName": "ck3-highlight",
-  "description": "Syntax highlighting for Crusader Kings III script files",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.107.0"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "contributes": {
-    "languages": [{
-      "id": "ck3",
-      "aliases": ["Crusader Kings III", "ck3"],
-      "extensions": [".txt",".gui",".map",".asset",".mod",".info",".shortcuts",".settings"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "ck3",
-      "scopeName": "source.paradox.ck3",
-      "path": "./syntaxes/ck3.tmLanguage.json"
-    }]
-  },
-	"main": "./src/extension.js"
+	"name": "ck3-highlight",
+	"displayName": "Crusader Kings III Highlight",
+	"description": "Syntax highlight for Crusader Kings III script files",
+	"version": "0.0.1",
+	"publisher": "Yusseter",
+	"icon": "icons/ck3.png",
+	"readme": "README.md",
+	"author": {
+		"name": "Yusseter"
+	},
+	"engines": {
+		"vscode": "^1.107.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"crusader kings"
+	],
+	"bugs": {
+		"url": "https://github.com/Yusseter/ck3-highlight/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Yusseter/ck3-highlight.git"
+	},
+	"homepage": "https://github.com/Yusseter/ck3-highlight",
+	"qna": "https://github.com/Yusseter/ck3-highlight/issues",
+	"contributes": {
+		"languages": [
+			{
+				"id": "ck3",
+				"aliases": [
+					"Crusader Kings III"
+				],
+      			"extensions": [
+					".txt",
+					".gui",
+					".info",
+					".map",
+					".asset",
+					".mod",
+					".shortcuts",
+					".settings"
+				],
+				"configuration": "./language-configuration.json",
+				"filenamePatterns": [
+					"**/{Crusader Kings III,CK,CK3,1158310}/**/*.{txt,gui,info,map,asset,mod,shortcuts,settings}"
+				],
+				"icon": {
+					"light": "./icons/ck3.png",
+					"dark": "./icons/ck3.png"
+				}
+			}
+		],
+		"grammars": [
+			{
+				"language": "ck3",
+				"scopeName": "source.paradox.ck3",
+				"path": "./syntaxes/ck3.tmLanguage.json"
+			}
+		]
+	},
+	"main": "./src/extension.js",
+	"activationEvents": [
+		"onLanguage:ck3"
+	]
 }
