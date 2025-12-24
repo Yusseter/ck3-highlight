@@ -2,7 +2,7 @@
 	"name": "ck3-highlight",
 	"displayName": "Crusader Kings III Highlight",
 	"description": "Syntax highlight for Crusader Kings III script files",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "Yusseter",
 	"icon": "icons/ck3.png",
 	"readme": "README.md",
@@ -16,7 +16,13 @@
 		"Programming Languages"
 	],
 	"keywords": [
-		"crusader kings"
+		"syntax",
+		"highlight",
+		"paradox",
+		"crusader kings",
+		"crusader kings 3",
+		"ck",
+		"ck3"
 	],
 	"bugs": {
 		"url": "https://github.com/Yusseter/ck3-highlight/issues"
@@ -32,11 +38,14 @@
 			{
 				"id": "ck3",
 				"aliases": [
-					"Crusader Kings III Paradox Script"
+					"CK3 Paradox Script"
 				],
 	  			"extensions": [
 					".txt",
 					".gui",
+					".gfx",
+					".dlc",
+					".sfx",
 					".info",
 					".map",
 					".asset",
@@ -46,7 +55,7 @@
 				],
 				"configuration": "./language-configuration.json",
 				"filenamePatterns": [
-					"**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{txt,gui,info,map,asset,mod,shortcuts,settings}"
+					"**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{txt,gui,gfx,dlc,sfx,info,map,asset,mod,shortcuts,settings}"
 				],
 				"icon": {
 					"light": "./icons/paradox_black.png",
@@ -61,6 +70,9 @@
 				"extensions": [
 					".txt",
 					".gui",
+					".gfx",
+					".dlc",
+					".sfx",
 					".info",
 					".map",
 					".asset",

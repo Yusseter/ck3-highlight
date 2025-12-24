@@ -44,8 +44,8 @@
 			"patterns": [ { "include": "source.paradox.loc" } ]
 		},
 		"function-without-para": {
-			"match": "([A-Z]\\w*)(\\.)?",
-			"name": "mata.function.without-para.paradox.loc",
+			"match": "([A-Z]\\w*)|(\\.)",
+			"name": "meta.function.without-para.paradox.loc",
 			"captures": {
 				"1": { "name": "markup.bold support.function.paradox.loc" },
 				"2": { "name": "markup.bold punctuation.seperator.dot-access.paradox.loc" }
