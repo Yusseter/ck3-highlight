@@ -112,6 +112,29 @@ function activate(context) {
 	vscode.languages.registerDocumentRangeFormattingEditProvider('hoi4', rangeFormatter);
 	vscode.languages.registerDocumentRangeFormattingEditProvider('vic3', rangeFormatter);
 	vscode.languages.registerDocumentRangeFormattingEditProvider('paradox', rangeFormatter);
+	const completionProvider = {
+		provideCompletionItems(document, position) {
+			if (position.character === 0) {
+				return undefined;
+			}
+
+			const prevPos = new vscode.Position(position.line, position.character - 1);
+			const range = new vscode.Range(prevPos, position);
+			const prevChar = document.getText(range);
+
+			if (prevChar === '{' || prevChar === '}') {
+				return undefined;
+			}
+
+			const items = [];
+			return items;
+		}
+	};
+
+	context.subscriptions.push(
+		vscode.languages.registerCompletionItemProvider('ck3', completionProvider, '.')
+	);
+
 
 	function fullDocumentRange(document) {
 		const start = new vscode.Position(0, 0);

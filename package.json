@@ -38,7 +38,7 @@
 			{
 				"id": "ck3",
 				"aliases": [
-					"CK3 Paradox Script"
+					"ParadoxScript CK3"
 				],
 	  			"extensions": [
 					".txt",
@@ -51,11 +51,12 @@
 					".asset",
 					".mod",
 					".shortcuts",
-					".settings"
+					".settings",
+					".modifierpack"
 				],
 				"configuration": "./language-configuration.json",
 				"filenamePatterns": [
-					"**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{txt,gui,gfx,dlc,sfx,info,map,asset,mod,shortcuts,settings}"
+					"**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{txt,gui,gfx,dlc,sfx,info,map,asset,mod,shortcuts,settings,modifierpack}"
 				],
 				"icon": {
 					"light": "./icons/paradox_black.png",
@@ -65,7 +66,7 @@
 			{
 				"id": "paradox",
 				"aliases": [
-					"Paradox Script"
+					"ParadoxScript"
 				],
 				"extensions": [
 					".txt",
@@ -78,7 +79,8 @@
 					".asset",
 					".mod",
 					".shortcuts",
-					".settings"
+					".settings",
+					".modifierpack"
 				],
 				"configuration": "./language-configuration.json",
 				"icon": {
