@@ -57,6 +57,26 @@ function formatPdx(text, baseIndent) {
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	const yamlAutoCloseConfig = vscode.languages.setLanguageConfiguration('yaml', {
+		autoClosingPairs: [
+			{ open: '{', close: '}' },
+			{ open: '[', close: ']' },
+			{ open: '(', close: ')' },
+			{ open: '"', close: '"' },
+			{ open: "'", close: "'" },
+			{ open: '$', close: '$', notIn: ['comment'] }
+		],
+		surroundingPairs: [
+			['{', '}'],
+			['[', ']'],
+			['(', ')'],
+			['"', '"'],
+			["'", "'"],
+			['$', '$']
+		]
+	});
+	context.subscriptions.push(yamlAutoCloseConfig);
+
 	// Register the format command
 	let disposable = vscode.commands.registerCommand('paradox-highlight.format', function () {
 		let editor = vscode.window.activeTextEditor;
