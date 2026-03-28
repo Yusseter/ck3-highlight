@@ -43,7 +43,7 @@
 	  			"extension": ".ck3",
 				"configuration": "./language-configuration.json",
 				"filenamePatterns": [
-					"**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{ck3,txt,gui,gfx,dlc,sfx,info,map,asset,shortcuts,settings,modifierpack}"
+					"**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{ck3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}"
 				],
 				"icon": {
 					"light": "./icons/paradox_black.png",
@@ -67,16 +67,18 @@
 					".info",
 					".map",
 					".asset",
+					".editordata",
+					".particle2",
 					".mod",
 					".shortcuts",
 					".settings",
 					".modifierpack"
 				],
 				"filenamePatterns": [
-					"**/{Europa Universalis IV,EU4,236850}/{**, mod}/*.{eu4,txt,gui,gfx,dlc,sfx,info,map,asset,shortcuts,settings,modifierpack}",
-					"**/{Hearts of Iron IV,HOI,HOI4,394360}/{**, mod}/*.{hoi4,txt,gui,gfx,dlc,sfx,info,map,asset,shortcuts,settings,modifierpack}",
-					"**/{Victoria 3,VIC,VIC3,529340}/{**, mod}/*.{vic3,txt,gui,gfx,dlc,sfx,info,map,asset,shortcuts,settings,modifierpack}",
-					"**/{Europa Universalis V,EU,EU5,3450310}/{**, mod}/*.{eu5,txt,gui,gfx,dlc,sfx,info,map,asset,shortcuts,settings,modifierpack}"
+					"**/{Europa Universalis IV,EU4,236850}/{**, mod}/*.{eu4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}",
+					"**/{Hearts of Iron IV,HOI,HOI4,394360}/{**, mod}/*.{hoi4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}",
+					"**/{Victoria 3,VIC,VIC3,529340}/{**, mod}/*.{vic3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}",
+					"**/{Europa Universalis V,EU,EU5,3450310}/{**, mod}/*.{eu5,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}"
 				],
 				"configuration": "./language-configuration.json",
 				"icon": {
@@ -106,11 +108,6 @@
 					"source.yaml"
 				],
 				"path": "./syntaxes/localization.tmLanguage.json"
-			},
-			{
-				"scopeName": "source.paradox.loc.entry",
-				"injectTo": [ "source.yaml" ],
-				"path": "./syntaxes/localization-entry.tmLanguage.json"
 			}
 		],
 		"commands": [
