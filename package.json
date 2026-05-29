@@ -6,15 +6,9 @@
 	"publisher": "Yusseter",
 	"icon": "icon.png",
 	"readme": "README.md",
-	"author": {
-		"name": "Yusseter"
-	},
-	"engines": {
-		"vscode": "^1.107.0"
-	},
-	"categories": [
-		"Programming Languages"
-	],
+	"author": { "name": "Yusseter" },
+	"engines": { "vscode": "^1.107.0" },
+	"categories": [ "Programming Languages" ],
 	"keywords": [
 		"syntax",
 		"highlight",
@@ -24,27 +18,62 @@
 		"ck",
 		"ck3"
 	],
-	"bugs": {
-		"url": "https://github.com/Yusseter/ck3-highlight/issues"
-	},
+	"bugs": { "url": "https://github.com/Yusseter/ck3-highlight/issues" },
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Yusseter/ck3-highlight.git"
 	},
 	"homepage": "https://github.com/Yusseter/ck3-highlight",
 	"qna": "https://github.com/Yusseter/ck3-highlight/issues",
+	"scripts": { "sync:ck3-tiger": "node ./scripts/sync-ck3-tiger.js" },
 	"contributes": {
+		"configurationDefaults": {
+			"editor.semanticTokenColorCustomizations": {
+				"rules": {
+					"scriptedParameter": {
+						"bold": false
+					}
+				}
+			},
+			"[ck3]": {
+				"editor.semanticHighlighting.enabled": true
+			},
+			"[paradox]": {
+				"editor.semanticHighlighting.enabled": true
+			}
+		},
+		"semanticTokenTypes": [
+			{
+				"id": "scriptedParameter",
+				"description": "Parameter key used in scripted CK3 call sites",
+				"superType": "parameter"
+			}
+		],
+		"semanticTokenScopes": [
+			{
+				"language": "ck3",
+				"scopes": {
+					"scriptedParameter": [
+						"variable.parameter"
+					]
+				}
+			},
+			{
+				"language": "paradox",
+				"scopes": {
+					"scriptedParameter": [
+						"variable.parameter"
+					]
+				}
+			}
+		],
 		"languages": [
 			{
 				"id": "ck3",
-				"aliases": [
-					"ParadoxScript CK3"
-				],
-	  			"extension": ".ck3",
+				"aliases": [ "ParadoxScript CK3" ],
+	  			"extensions": [ ".ck3" ],
 				"configuration": "./language-configuration.json",
-				"filenamePatterns": [
-					"**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{ck3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}"
-				],
+				"filenamePatterns": [ "**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{ck3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}" ],
 				"icon": {
 					"light": "./icons/paradox_black.png",
 					"dark": "./icons/paradox_white.png"
@@ -52,9 +81,7 @@
 			},
 			{
 				"id": "paradox",
-				"aliases": [
-					"ParadoxScript"
-				],
+				"aliases": [ "ParadoxScript" ],
 				"extensions": [
 					".eu4",
 					".eu5",
@@ -72,13 +99,14 @@
 					".mod",
 					".shortcuts",
 					".settings",
-					".modifierpack"
+					".modifierpack",
+					"shader"
 				],
 				"filenamePatterns": [
-					"**/{Europa Universalis IV,EU4,236850}/{**, mod}/*.{eu4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}",
-					"**/{Hearts of Iron IV,HOI,HOI4,394360}/{**, mod}/*.{hoi4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}",
-					"**/{Victoria 3,VIC,VIC3,529340}/{**, mod}/*.{vic3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}",
-					"**/{Europa Universalis V,EU,EU5,3450310}/{**, mod}/*.{eu5,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack}"
+					"**/{Europa Universalis IV,EU4,236850}/{**, mod}/*.{eu4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}",
+					"**/{Hearts of Iron IV,HOI,HOI4,394360}/{**, mod}/*.{hoi4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}",
+					"**/{Victoria 3,VIC,VIC3,529340}/{**, mod}/*.{vic3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}",
+					"**/{Europa Universalis V,EU,EU5,3450310}/{**, mod}/*.{eu5,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}"
 				],
 				"configuration": "./language-configuration.json",
 				"icon": {
@@ -92,14 +120,22 @@
 				"language": "ck3",
 				"scopeName": "source.paradox.ck3",
 				"path": "./syntaxes/ck3.tmLanguage.json",
-				"injectTo": [
-      				"source.paradox"
-    			]
+				"injectTo": [ "source.paradox" ],
+				"unbalancedBracketScopes": [
+					"meta.calculation.paradox",
+					"punctuation.section.calculation.begin.paradox",
+					"punctuation.section.calculation.end.paradox"
+				]
 			},
 			{
 				"language": "paradox",
 				"scopeName": "source.paradox",
-				"path": "./syntaxes/paradox.tmLanguage.json"
+				"path": "./syntaxes/paradox.tmLanguage.json",
+				"unbalancedBracketScopes": [
+					"meta.calculation.paradox",
+					"punctuation.section.calculation.begin.paradox",
+					"punctuation.section.calculation.end.paradox"
+				]
 			},
 			{
 				"scopeName": "source.paradox.loc",
@@ -119,6 +155,8 @@
 	},
 	"main": "./src/extension.js",
 	"activationEvents": [
+		"onLanguage:ck3",
+		"onLanguage:paradox",
 		"onLanguage:yaml"
 	]
 }

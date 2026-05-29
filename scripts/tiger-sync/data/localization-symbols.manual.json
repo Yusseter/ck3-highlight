@@ -1,0 +1,10 @@
+{
+	"localization-key-fields": [
+		"custom_desc",
+		"custom_description",
+		"custom_description_no_bullet",
+		"custom_label",
+		"custom_tooltip",
+		"defined_text"
+	]
+}
