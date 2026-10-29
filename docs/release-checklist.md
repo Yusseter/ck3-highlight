@@ -16,10 +16,15 @@
 - The editor-test launcher treats timeout, signal and missing/nonzero process status as failures, even if assertions already wrote a success report.
 - The owner confirmed that the reported Problems panel warnings are no longer visible. Formatter and configuration regression tests cover their causes.
 
+## Release Assets
+
+- Upload the installable VSIX as the only custom asset by default.
+- Use GitHub's automatic Source code (zip) and Source code (tar.gz) downloads for the matching editable sources, build inputs and license information. Confirm that all required inputs are tracked at the release tag.
+- Use GitHub's asset SHA-256 digests for download verification. Add a separate source archive or checksum file only when it provides something the automatic downloads and digests do not.
+
 ## Before Publication
 
 - [ ] Require successful Windows/Linux CI for the exact source revision selected for publication.
 - [ ] Gather manual feedback on the installed build with normal themes/extensions.
-- [ ] Publish the VSIX and matching preferred editable sources, build inputs, notices and license information together. Do not publish a local VSIX whose corresponding source revision has not been made available as required.
-
-Local test success and choosing a license do not by themselves mean a public release has been approved or all upstream obligations have been cleared.
+- [ ] Confirm that binary recipients can access the matching preferred editable sources, build inputs, notices and license information. Downloads in a private repository are not public source access.
+- [ ] Publish the VSIX from the verified source revision, with the corresponding source downloads available.
