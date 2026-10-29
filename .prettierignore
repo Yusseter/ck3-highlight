@@ -1,14 +1,20 @@
-# Dependencies, local records and package output
+# Node.js files
 node_modules/
+
+# Local working folders
 .cache/
-dist/
 docs/development/
 
-# Generated grammars/feeds are formatted by their generators
+# Release output
+dist/
+
+# Generated files
 generated/
 syntaxes/
 
-# Preserve third-party notices and package-manager output
+# Third-party files
 licenses/
 LICENSE
+
+# Package manager files
 pnpm-lock.yaml

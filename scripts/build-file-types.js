@@ -28,7 +28,10 @@ function buildFileTypeContributions(languages) {
           ],
         };
       }
-      return language;
+      return {
+        ...language,
+        filenamePatterns: [`*_l_*${fileTypes.localizationExtension}`],
+      };
     });
 }
 

@@ -44,7 +44,7 @@ async function classifyDocument(
   const extension = path.extname(file).toLowerCase();
   if (fileTypes.ck3Filenames.includes(path.basename(file).toLowerCase()))
     return 'ck3';
-  if (extension === '.yml' || extension === '.yaml') {
+  if (extension === fileTypes.localizationExtension) {
     const firstContent = document
       .getText()
       .replace(/^\uFEFF/, '')

@@ -23,6 +23,10 @@ const { status } = runEditorTestHost({
     );
     fs.writeFileSync(path.join(workspace, 'normal.yaml'), 'title: ""');
     fs.writeFileSync(
+      path.join(workspace, 'not_ck3_l_english.yaml'),
+      'l_english:\n KEY:0 "Text"',
+    );
+    fs.writeFileSync(
       path.join(workspace, 'events', 'example.txt'),
       'root = {\n x = "first\n      keep spaces  \n   last"\n}',
     );

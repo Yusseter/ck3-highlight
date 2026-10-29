@@ -75,7 +75,10 @@ async function run() {
     lag;
   try {
     snapshots = new Map(textFiles(root).map((file) => [file, hash(file)]));
-    const extension = vscode.extensions.getExtension('Yusseter.ck3-highlight');
+    const manifest = require('../../package.json');
+    const extension = vscode.extensions.getExtension(
+      `${manifest.publisher}.${manifest.name}`,
+    );
     await extension.activate();
     lag = monitorEventLoopDelay({ resolution: 20 });
     lag.enable();

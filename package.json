@@ -1,34 +1,34 @@
 {
   "name": "ck3-highlight",
   "displayName": "Crusader Kings III Highlight",
-  "description": "Syntax highlight for Crusader Kings III script files",
+  "description": "Syntax highlighting, script formatting and parameter highlighting for Crusader Kings III scripts and localization.",
   "version": "0.0.4",
   "license": "GPL-3.0-or-later",
   "publisher": "Yusseter",
   "icon": "icons/icon.png",
   "readme": "README.md",
   "author": {
-    "name": "Yusseter"
+    "name": "Yusuf Erdem Yazgan"
   },
   "engines": {
     "vscode": "^1.107.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Formatters"
   ],
   "keywords": [
-    "syntax",
-    "highlight",
-    "paradox",
-    "crusader kings",
-    "crusader kings 3",
-    "ck",
     "ck3",
-    "jomini",
+    "crusader kings iii",
+    "crusader kings 3",
+    "paradox",
     "paradox-script",
-    "localization",
+    "jomini",
     "modding",
-    "syntax-highlighting"
+    "localization",
+    "syntax-highlighting",
+    "formatting",
+    "semantic-highlighting"
   ],
   "bugs": {
     "url": "https://github.com/Yusseter/ck3-highlight/issues"
@@ -76,7 +76,7 @@
   },
   "contributes": {
     "configuration": {
-      "title": "CK3 Highlight",
+      "title": "Crusader Kings III Highlight",
       "properties": {
         "ck3Highlight.autoDetect": {
           "type": "boolean",
@@ -138,14 +138,13 @@
           "CK3 Localization"
         ],
         "filenamePatterns": [
-          "*_l_*.yml",
-          "*_l_*.yaml"
+          "*_l_*.yml"
         ],
         "firstLine": "^\\uFEFF?[\\t ]*l_[A-Za-z_]+:[\\t ]*(?:#.*)?$",
         "configuration": "./localization-language-configuration.json",
         "icon": {
-          "light": "./icons/ck3-light.png",
-          "dark": "./icons/ck3-dark.png"
+          "light": "./icons/paradox-light.png",
+          "dark": "./icons/paradox-dark.png"
         }
       },
       {
@@ -164,8 +163,8 @@
           "**/1158310/**/*.{audio2,compound,font,heightmap,lines,lookup,particle,skin,terrain,vertical_borders}"
         ],
         "icon": {
-          "light": "./icons/ck3-light.png",
-          "dark": "./icons/ck3-dark.png"
+          "light": "./icons/paradox-light.png",
+          "dark": "./icons/paradox-dark.png"
         },
         "filenames": [
           "ck3-tiger.conf"
@@ -232,7 +231,7 @@
     ],
     "commands": [
       {
-        "command": "paradox-highlight.format",
+        "command": "ck3Highlight.format",
         "title": "Format CK3 Scripts"
       }
     ]

@@ -14,7 +14,10 @@ async function waitFor(predicate) {
 async function run() {
   const results = [];
   try {
-    const extension = vscode.extensions.getExtension('Yusseter.ck3-highlight');
+    const manifest = require('../../package.json');
+    const extension = vscode.extensions.getExtension(
+      `${manifest.publisher}.${manifest.name}`,
+    );
     assert.ok(extension, 'development extension is registered');
     const configUris = [
       '.markdownlint-cli2.jsonc',
@@ -109,6 +112,13 @@ async function run() {
     results.push(
       'native localization comments preserve indentation and toggle back',
     );
+
+    const yamlWithHeader = await vscode.workspace.openTextDocument(
+      path.join(folder, 'not_ck3_l_english.yaml'),
+    );
+    await vscode.window.showTextDocument(yamlWithHeader);
+    assert.equal(yamlWithHeader.languageId, 'yaml');
+    results.push('.yaml stays YAML even with a CK3-style header and filename');
 
     const yaml = await vscode.workspace.openTextDocument(
       path.join(folder, 'normal.yaml'),

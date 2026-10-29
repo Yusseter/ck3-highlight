@@ -104,6 +104,17 @@ test('registers script editing providers only for CK3', () => {
   assert.deepEqual([...activate().formatters.keys()], ['ck3']);
 });
 
+test('formatter command does not claim the upstream extension command', () => {
+  const manifest = require('../package.json');
+  const command = manifest.contributes.commands.find(
+    (item) => item.title === 'Format CK3 Scripts',
+  ).command;
+  assert.equal(command, 'ck3Highlight.format');
+  const result = activate();
+  assert(result.commands.has(command));
+  assert(!result.commands.has('paradox-highlight.format'));
+});
+
 test('range formatting uses document context and does not delete the selected first-line indent', () => {
   const result = activate();
   const lines = ['outer = {', ' child = {', ' x = yes', ' }', '}'];

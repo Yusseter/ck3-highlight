@@ -41,6 +41,18 @@ test('recognizes localization by its language header, including BOM/comments', a
   );
 });
 
+test('does not automatically classify .yaml files as CK3 localization', async () => {
+  for (const file of ['/example/test.yaml', '/example/test_l_english.yaml']) {
+    assert.equal(
+      await classifyDocument(
+        document(file, 'l_english:\n key:0 "Text"', 'yaml'),
+      ),
+      null,
+      file,
+    );
+  }
+});
+
 test('does not replace explicitly selected unrelated languages', async () => {
   assert.equal(
     await classifyDocument(
@@ -51,9 +63,7 @@ test('does not replace explicitly selected unrelated languages', async () => {
 });
 
 test('leaves ambiguous descriptor-based mods alone until CK3 context is available', async (t) => {
-  const root = await fs.mkdtemp(
-    path.join(os.tmpdir(), 'ck3-highlight-project-'),
-  );
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'ck3-project-test-'));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   await fs.writeFile(path.join(root, 'descriptor.mod'), 'name = "Example"');
   const doc = document(path.join(root, 'events', 'example.txt'), 'x = yes');

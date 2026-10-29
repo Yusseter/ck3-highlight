@@ -74,7 +74,7 @@ function activate(context) {
     );
   }
   context.subscriptions.push(
-    vscode.commands.registerCommand('paradox-highlight.format', async () => {
+    vscode.commands.registerCommand('ck3Highlight.format', async () => {
       const editor = vscode.window.activeTextEditor;
       if (editor && scriptLanguages.includes(editor.document.languageId)) {
         await vscode.commands.executeCommand('editor.action.formatDocument');

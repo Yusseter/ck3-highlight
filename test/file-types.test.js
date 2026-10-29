@@ -40,6 +40,13 @@ test('manifest language associations match the shared file-type registry', () =>
   );
 });
 
+test('localization associations use the documented CK3 .yml extension', () => {
+  const localization = manifest.contributes.languages.find(
+    (language) => language.id === 'ck3-localization',
+  );
+  assert.deepEqual(localization.filenamePatterns, ['*_l_*.yml']);
+});
+
 test('only CK3 script and localization modes are registered', () => {
   assert.deepEqual(
     manifest.contributes.languages
@@ -84,7 +91,7 @@ test('both CK3 languages supply packaged light and dark fallback icons', () => {
   for (const language of manifest.contributes.languages) {
     for (const theme of ['light', 'dark']) {
       assert(language.icon?.[theme], language.id + ': ' + theme);
-      assert.equal(language.icon[theme], './icons/ck3-' + theme + '.png');
+      assert.equal(language.icon[theme], './icons/paradox-' + theme + '.png');
       const file = path.resolve(__dirname, '..', language.icon[theme]);
       const data = fs.readFileSync(file);
       assert.equal(

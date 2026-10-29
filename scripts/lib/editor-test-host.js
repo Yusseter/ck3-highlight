@@ -14,7 +14,7 @@ function runEditorTestHost({
   if (!executable || !fs.statSync(executable).isFile())
     throw new Error('Pass a VS Code executable path.');
   const root = path.resolve(__dirname, '..', '..');
-  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'ck3-highlight-editor-'));
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'ck3-editor-test-'));
   const workspace = prepare(temp);
   const profile = path.join(temp, 'profile');
   fs.mkdirSync(path.join(profile, 'User'), { recursive: true });

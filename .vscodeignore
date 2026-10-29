@@ -1,25 +1,25 @@
-# Default: exclude development sources, tools, tests and local output
+# Default exclusions
 **
 
-# Package metadata and user documentation
+# Project metadata and documentation
 !package.json
 !README.md
 !CHANGELOG.md
 
-# Project and upstream licensing
+# Licenses and notices
 !LICENSE
 !LICENSE.txt
 !LICENSE.md
 !NOTICE.md
 !licenses/**
 
-# Extension artwork
+# Icons
 !icons/**
 
-# Runtime code and compiled grammars
+# Runtime files
 !src/**
 !syntaxes/**
 
-# Language editing configuration
+# Language configuration files
 !language-configuration.json
 !localization-language-configuration.json
