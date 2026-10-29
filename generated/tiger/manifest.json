@@ -1,615 +1,822 @@
 {
-	"schemaVersion": 1,
-	"feeds": [
-		{
-			"id": "ck3-keywords",
-			"file": "ck3-keywords.json",
-			"description": "Core CK3 keyword lists extracted from ck3 tables.",
-			"sourceFiles": [
-				"src/ck3/tables/effects.rs",
-				"src/ck3/tables/triggers.rs",
-				"src/ck3/tables/targets.rs",
-				"src/ck3/tables/modifs.rs",
-				"src/ck3/tables/iterators.rs"
-			],
-			"sections": [
-				{
-					"name": "effects",
-					"count": 2146,
-					"extractor": "tuple-field:SCOPE_EFFECT[1]+iterator-variants",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "ck3",
-							"repositoryKey": "effects",
-							"patternBuilder": "whole-word"
-						}
-					]
-				},
-				{
-					"name": "triggers",
-					"count": 1290,
-					"extractor": "tuple-field:TRIGGER[1]+TRIGGER_COMPLEX[1]",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "ck3",
-							"repositoryKey": "triggers",
-							"patternBuilder": "whole-word"
-						}
-					]
-				},
-				{
-					"name": "event_targets",
-					"count": 69,
-					"extractor": "tuple-field:SCOPE_PREFIX[1]",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "ck3",
-							"repositoryKey": "event_targets",
-							"patternBuilder": "event-target"
-						}
-					]
-				},
-				{
-					"name": "scopes",
-					"count": 222,
-					"extractor": "tuple-field:SCOPE_TO_SCOPE[1]",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "ck3",
-							"repositoryKey": "scopes",
-							"patternBuilder": "scope-word"
-						}
-					]
-				},
-				{
-					"name": "modifiers",
-					"count": 628,
-					"extractor": "tuple-field:MODIF_TABLE[0]",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "ck3",
-							"repositoryKey": "modifiers",
-							"patternBuilder": "whole-word"
-						}
-					]
-				}
-			]
-		},
-		{
-			"id": "ck3-context",
-			"file": "ck3-context.json",
-			"description": "CK3 built-in on_actions and scripted rule names extracted from tiger tables.",
-			"sourceFiles": [
-				"src/ck3/tables/on_action.rs",
-				"src/ck3/tables/rules.rs"
-			],
-			"sections": [
-				{
-					"name": "on-actions",
-					"count": 202,
-					"extractor": "const-string:ON_ACTION_SCOPES top-level keys",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-lhs",
-							"patternBuilder": "parameters-lhs"
-						},
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-rhs",
-							"patternBuilder": "parameters-rhs"
-						}
-					]
-				},
-				{
-					"name": "scripted-rules",
-					"count": 62,
-					"extractor": "const-string:SCRIPTED_RULES top-level keys",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "ck3",
-							"repositoryKey": "triggers",
-							"patternBuilder": "whole-word"
-						}
-					]
-				}
-			]
-		},
-		{
-			"id": "ck3-static-tables",
-			"file": "ck3-static-tables.json",
-			"description": "Static CK3 tiger tables tracked for future grammar and tooling use.",
-			"sourceFiles": [
-				"src/ck3/tables/defines.rs",
-				"src/ck3/tables/localization.rs",
-				"src/ck3/tables/misc.rs",
-				"src/ck3/tables/sounds.rs"
-			],
-			"sections": [
-				{
-					"name": "defines",
-					"count": 2120,
-					"extractor": "tuple-field:DEFINES[0]",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "define-namespaces",
-					"count": 147,
-					"extractor": "split:DEFINES namespace",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "define-keys",
-					"count": 2081,
-					"extractor": "split:DEFINES key",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "sounds",
-					"count": 899,
-					"extractor": "const-array:SOUNDS",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "complex-tooltip-tags",
-					"count": 58,
-					"extractor": "tuple-field:COMPLEX_TOOLTIPS[0]",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "common-dirs",
-					"count": 164,
-					"extractor": "const-array:COMMON_DIRS",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "custom-religion-locas",
-					"count": 128,
-					"extractor": "const-array:CUSTOM_RELIGION_LOCAS",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "banned-title-history-types",
-					"count": 3,
-					"extractor": "const-array:BANNED_TITLE_HISTORY_TYPES",
-					"updateMode": "additive",
-					"targets": []
-				}
-			]
-		},
-		{
-			"id": "paradox-parameters",
-			"file": "paradox-parameters.json",
-			"description": "CK3-specific shared Paradox parameter and value lists.",
-			"sourceFiles": [
-				"src/ck3/data/accolades.rs",
-				"src/ck3/data/activities.rs",
-				"src/ck3/data/ai_war_stances.rs",
-				"src/ck3/data/amenities.rs",
-				"src/ck3/data/artifacts.rs",
-				"src/ck3/data/bookmarks.rs",
-				"src/ck3/data/buildings.rs",
-				"src/ck3/data/casusbelli.rs",
-				"src/ck3/data/character_templates.rs",
-				"src/ck3/data/characters.rs",
-				"src/ck3/data/climate.rs",
-				"src/ck3/data/combat.rs",
-				"src/ck3/data/combat_effects.rs",
-				"src/ck3/data/confederations.rs",
-				"src/ck3/data/connection_arrows.rs",
-				"src/ck3/data/council.rs",
-				"src/ck3/data/court_scene.rs",
-				"src/ck3/data/court_type.rs",
-				"src/ck3/data/courtier_guest_mgmt.rs",
-				"src/ck3/data/courtpos.rs",
-				"src/ck3/data/culture_history.rs",
-				"src/ck3/data/cultures.rs",
-				"src/ck3/data/deathreasons.rs",
-				"src/ck3/data/decisions.rs",
-				"src/ck3/data/diarchies.rs",
-				"src/ck3/data/difficulty.rs",
-				"src/ck3/data/doctrines.rs",
-				"src/ck3/data/domiciles.rs",
-				"src/ck3/data/dynasties.rs",
-				"src/ck3/data/dynasty_legacies.rs",
-				"src/ck3/data/election.rs",
-				"src/ck3/data/epidemics.rs",
-				"src/ck3/data/event_effect_2d.rs",
-				"src/ck3/data/event_themes.rs",
-				"src/ck3/data/factions.rs",
-				"src/ck3/data/flatmap.rs",
-				"src/ck3/data/flavorization.rs",
-				"src/ck3/data/focus.rs",
-				"src/ck3/data/gameconcepts.rs",
-				"src/ck3/data/gamerules.rs",
-				"src/ck3/data/government.rs",
-				"src/ck3/data/graphical_unit_types.rs",
-				"src/ck3/data/greatprojects.rs",
-				"src/ck3/data/holdings.rs",
-				"src/ck3/data/holysites.rs",
-				"src/ck3/data/hooks.rs",
-				"src/ck3/data/house_unities.rs",
-				"src/ck3/data/houses.rs",
-				"src/ck3/data/important_actions.rs",
-				"src/ck3/data/innovations.rs",
-				"src/ck3/data/inspirations.rs",
-				"src/ck3/data/interaction_cats.rs",
-				"src/ck3/data/interactions.rs",
-				"src/ck3/data/laws.rs",
-				"src/ck3/data/lease_contracts.rs",
-				"src/ck3/data/legends.rs",
-				"src/ck3/data/legitimacy.rs",
-				"src/ck3/data/lifestyles.rs",
-				"src/ck3/data/lines.rs",
-				"src/ck3/data/maa.rs",
-				"src/ck3/data/map_environment.rs",
-				"src/ck3/data/mapmodes.rs",
-				"src/ck3/data/memories.rs",
-				"src/ck3/data/messages.rs",
-				"src/ck3/data/mod.rs",
-				"src/ck3/data/modif.rs",
-				"src/ck3/data/modifiers.rs",
-				"src/ck3/data/mottos.rs",
-				"src/ck3/data/namelists.rs",
-				"src/ck3/data/nickname.rs",
-				"src/ck3/data/opinions.rs",
-				"src/ck3/data/perks.rs",
-				"src/ck3/data/points_of_interest.rs",
-				"src/ck3/data/pool.rs",
-				"src/ck3/data/portrait_types.rs",
-				"src/ck3/data/prov_effects.rs",
-				"src/ck3/data/prov_history.rs",
-				"src/ck3/data/prov_terrain.rs",
-				"src/ck3/data/provinces.rs",
-				"src/ck3/data/raids.rs",
-				"src/ck3/data/regions.rs",
-				"src/ck3/data/relations.rs",
-				"src/ck3/data/religions.rs",
-				"src/ck3/data/ruler_objectives.rs",
-				"src/ck3/data/schemes.rs",
-				"src/ck3/data/scripted_animations.rs",
-				"src/ck3/data/scripted_costs.rs",
-				"src/ck3/data/scripted_illustrations.rs",
-				"src/ck3/data/secrets.rs",
-				"src/ck3/data/situations.rs",
-				"src/ck3/data/stories.rs",
-				"src/ck3/data/struggle.rs",
-				"src/ck3/data/subjectcontract.rs",
-				"src/ck3/data/succession.rs",
-				"src/ck3/data/suggestions.rs",
-				"src/ck3/data/table_styles.rs",
-				"src/ck3/data/task_contracts.rs",
-				"src/ck3/data/tax_slots.rs",
-				"src/ck3/data/terrain.rs",
-				"src/ck3/data/title_history.rs",
-				"src/ck3/data/titles.rs",
-				"src/ck3/data/trait_portrait_modifiers.rs",
-				"src/ck3/data/traits.rs",
-				"src/ck3/data/travel.rs",
-				"src/ck3/data/vassalstance.rs",
-				"src/ck3/data/wars.rs",
-				"src/ck3/effect_validation.rs",
-				"src/ck3/events.rs",
-				"src/ck3/tables/misc.rs",
-				"src/ck3/validate.rs"
-			],
-			"sections": [
-				{
-					"name": "parameters-lhs",
-					"count": 1776,
-					"extractor": "validator-fields",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-lhs",
-							"patternBuilder": "parameters-lhs"
-						}
-					]
-				},
-				{
-					"name": "parameters-rhs",
-					"count": 563,
-					"extractor": "validator-choice+misc",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-rhs",
-							"patternBuilder": "parameters-rhs"
-						}
-					]
-				}
-			]
-		},
-		{
-			"id": "gui-symbols",
-			"file": "gui-symbols.json",
-			"description": "GUI widget properties, builtins, and enumerated GUI value tokens.",
-			"sourceFiles": [
-				"guiproperties.txt",
-				"src/gui/builtins.rs",
-				"src/gui/properties.rs"
-			],
-			"sections": [
-				{
-					"name": "widget-properties",
-					"count": 402,
-					"extractor": "enum:WidgetProperty+guiproperties",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-lhs",
-							"patternBuilder": "parameters-lhs"
-						}
-					]
-				},
-				{
-					"name": "widget-types",
-					"count": 57,
-					"extractor": "enum:BuiltinWidget",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-lhs",
-							"patternBuilder": "parameters-lhs"
-						}
-					]
-				},
-				{
-					"name": "widget-choice-values",
-					"count": 47,
-					"extractor": "gui-choice",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-rhs",
-							"patternBuilder": "parameters-rhs"
-						}
-					]
-				}
-			]
-		},
-		{
-			"id": "localization-symbols",
-			"file": "localization-symbols.json",
-			"description": "Localization helper fields and CK3 localization-key fields used across Jomini helpers and validators.",
-			"sourceFiles": [
-				"src/ck3/data/accolades.rs",
-				"src/ck3/data/activities.rs",
-				"src/ck3/data/ai_war_stances.rs",
-				"src/ck3/data/amenities.rs",
-				"src/ck3/data/artifacts.rs",
-				"src/ck3/data/bookmarks.rs",
-				"src/ck3/data/buildings.rs",
-				"src/ck3/data/casusbelli.rs",
-				"src/ck3/data/character_templates.rs",
-				"src/ck3/data/characters.rs",
-				"src/ck3/data/climate.rs",
-				"src/ck3/data/combat.rs",
-				"src/ck3/data/combat_effects.rs",
-				"src/ck3/data/confederations.rs",
-				"src/ck3/data/connection_arrows.rs",
-				"src/ck3/data/council.rs",
-				"src/ck3/data/court_scene.rs",
-				"src/ck3/data/court_type.rs",
-				"src/ck3/data/courtier_guest_mgmt.rs",
-				"src/ck3/data/courtpos.rs",
-				"src/ck3/data/culture_history.rs",
-				"src/ck3/data/cultures.rs",
-				"src/ck3/data/deathreasons.rs",
-				"src/ck3/data/decisions.rs",
-				"src/ck3/data/diarchies.rs",
-				"src/ck3/data/difficulty.rs",
-				"src/ck3/data/doctrines.rs",
-				"src/ck3/data/domiciles.rs",
-				"src/ck3/data/dynasties.rs",
-				"src/ck3/data/dynasty_legacies.rs",
-				"src/ck3/data/election.rs",
-				"src/ck3/data/epidemics.rs",
-				"src/ck3/data/event_effect_2d.rs",
-				"src/ck3/data/event_themes.rs",
-				"src/ck3/data/factions.rs",
-				"src/ck3/data/flatmap.rs",
-				"src/ck3/data/flavorization.rs",
-				"src/ck3/data/focus.rs",
-				"src/ck3/data/gameconcepts.rs",
-				"src/ck3/data/gamerules.rs",
-				"src/ck3/data/government.rs",
-				"src/ck3/data/graphical_unit_types.rs",
-				"src/ck3/data/greatprojects.rs",
-				"src/ck3/data/holdings.rs",
-				"src/ck3/data/holysites.rs",
-				"src/ck3/data/hooks.rs",
-				"src/ck3/data/house_unities.rs",
-				"src/ck3/data/houses.rs",
-				"src/ck3/data/important_actions.rs",
-				"src/ck3/data/innovations.rs",
-				"src/ck3/data/inspirations.rs",
-				"src/ck3/data/interaction_cats.rs",
-				"src/ck3/data/interactions.rs",
-				"src/ck3/data/laws.rs",
-				"src/ck3/data/lease_contracts.rs",
-				"src/ck3/data/legends.rs",
-				"src/ck3/data/legitimacy.rs",
-				"src/ck3/data/lifestyles.rs",
-				"src/ck3/data/lines.rs",
-				"src/ck3/data/maa.rs",
-				"src/ck3/data/map_environment.rs",
-				"src/ck3/data/mapmodes.rs",
-				"src/ck3/data/memories.rs",
-				"src/ck3/data/messages.rs",
-				"src/ck3/data/mod.rs",
-				"src/ck3/data/modif.rs",
-				"src/ck3/data/modifiers.rs",
-				"src/ck3/data/mottos.rs",
-				"src/ck3/data/namelists.rs",
-				"src/ck3/data/nickname.rs",
-				"src/ck3/data/opinions.rs",
-				"src/ck3/data/perks.rs",
-				"src/ck3/data/points_of_interest.rs",
-				"src/ck3/data/pool.rs",
-				"src/ck3/data/portrait_types.rs",
-				"src/ck3/data/prov_effects.rs",
-				"src/ck3/data/prov_history.rs",
-				"src/ck3/data/prov_terrain.rs",
-				"src/ck3/data/provinces.rs",
-				"src/ck3/data/raids.rs",
-				"src/ck3/data/regions.rs",
-				"src/ck3/data/relations.rs",
-				"src/ck3/data/religions.rs",
-				"src/ck3/data/ruler_objectives.rs",
-				"src/ck3/data/schemes.rs",
-				"src/ck3/data/scripted_animations.rs",
-				"src/ck3/data/scripted_costs.rs",
-				"src/ck3/data/scripted_illustrations.rs",
-				"src/ck3/data/secrets.rs",
-				"src/ck3/data/situations.rs",
-				"src/ck3/data/stories.rs",
-				"src/ck3/data/struggle.rs",
-				"src/ck3/data/subjectcontract.rs",
-				"src/ck3/data/succession.rs",
-				"src/ck3/data/suggestions.rs",
-				"src/ck3/data/table_styles.rs",
-				"src/ck3/data/task_contracts.rs",
-				"src/ck3/data/tax_slots.rs",
-				"src/ck3/data/terrain.rs",
-				"src/ck3/data/title_history.rs",
-				"src/ck3/data/titles.rs",
-				"src/ck3/data/trait_portrait_modifiers.rs",
-				"src/ck3/data/traits.rs",
-				"src/ck3/data/travel.rs",
-				"src/ck3/data/vassalstance.rs",
-				"src/ck3/data/wars.rs",
-				"src/ck3/effect_validation.rs",
-				"src/ck3/events.rs",
-				"src/ck3/validate.rs",
-				"src/data/customloca.rs",
-				"src/data/effect_localization.rs",
-				"src/data/trigger_localization.rs"
-			],
-			"sections": [
-				{
-					"name": "localization-fields",
-					"count": 30,
-					"extractor": "validator-fields",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "paradox",
-							"repositoryKey": "parameters-lhs",
-							"patternBuilder": "parameters-lhs"
-						}
-					]
-				},
-				{
-					"name": "localization-key-fields",
-					"count": 74,
-					"extractor": "validator-item-fields:Item::Localization + manual-supplement",
-					"updateMode": "additive",
-					"targets": []
-				}
-			]
-		},
-		{
-			"id": "localization-builtins",
-			"file": "localization-builtins.json",
-			"description": "Builtin localization macros and CK3 data function names extracted from tiger tables.",
-			"sourceFiles": [
-				"src/ck3/tables/localization.rs",
-				"tiger-tables/src/ck3/include/data_functions.rs",
-				"tiger-tables/src/ck3/include/data_global_functions.rs",
-				"tiger-tables/src/ck3/include/data_global_promotes.rs",
-				"tiger-tables/src/ck3/include/data_promotes.rs"
-			],
-			"sections": [
-				{
-					"name": "builtin-macros",
-					"count": 527,
-					"extractor": "const-array:BUILTIN_MACROS + manual-supplement",
-					"updateMode": "additive",
-					"targets": [
-						{
-							"grammarId": "localization",
-							"repositoryKey": "builtin-macro",
-							"patternBuilder": "localization-token"
-						}
-					]
-				},
-				{
-					"name": "builtin-scopes",
-					"count": 5,
-					"extractor": "manual-supplement",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "no-arg-functions",
-					"count": 8277,
-					"extractor": "tuple-field:*[0] filtered by Args::Args(&[])",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "with-arg-functions",
-					"count": 2197,
-					"extractor": "tuple-field:*[0] filtered by Args != Args::Args(&[])",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "global-promotes",
-					"count": 309,
-					"extractor": "tuple-field:GLOBAL_PROMOTES_CK3[0]",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "global-functions",
-					"count": 829,
-					"extractor": "tuple-field:GLOBAL_FUNCTIONS_CK3[0]",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "promotes",
-					"count": 1204,
-					"extractor": "tuple-field:PROMOTES_CK3[0]",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "functions",
-					"count": 9199,
-					"extractor": "tuple-field:FUNCTIONS_CK3[0]",
-					"updateMode": "additive",
-					"targets": []
-				},
-				{
-					"name": "receiver-types",
-					"count": 1167,
-					"extractor": "tuple-field:* receiver type",
-					"updateMode": "additive",
-					"targets": []
-				}
-			]
-		}
-	]
+  "schemaVersion": 2,
+  "provenance": {
+    "upstream": {
+      "revision": "f063dca03ea444c6acfd903a2abcccda9c84cad5",
+      "inputs": {
+        "guiproperties.txt": "d2c2e3fa2c4409a8dfe3c7ed7637c478e50689d842d9b17d248ffaec0e0ab786",
+        "src/ck3/data/accolades.rs": "b0626358417cb21dd03118bb2aef1aa79f16aa70486abbf8c55c0e2d4bfd17c3",
+        "src/ck3/data/activities.rs": "5caeaee5a680953754ace9a31bd9dea60275b54acfc7215bdcdce4907964f6af",
+        "src/ck3/data/ai_war_stances.rs": "2145be72774212a75bd469bcc274f75e8a1945a3a6a93ce031561973085a6857",
+        "src/ck3/data/amenities.rs": "77a475cf6bc0237684f9b8031b97927e8619df14a402c5f71b462c14760ad796",
+        "src/ck3/data/artifacts.rs": "0bd46ed9951171954b581f5edc3f965c7105ed583407b54055788a660f747fb3",
+        "src/ck3/data/bookmarks.rs": "f15f728e2934361b8a422ee23bd788bdb944146696f844abdbe74d075b663658",
+        "src/ck3/data/buildings.rs": "5fe5eb1cef556a5e23eaaa74e78847de69f744a6f5c01f6dadf1dfa0e0b01a54",
+        "src/ck3/data/casusbelli.rs": "a00c44b916e98acc2121b25ffc9a06e9cfa206cddd7aa9ac41b3bc20c7ddff1d",
+        "src/ck3/data/character_templates.rs": "8ee6b85fde5b96bcec530f6ed7fa8c377dea485e9359ce63a1d4d7e66d629373",
+        "src/ck3/data/characters.rs": "9f60828027c58f0097aecf538a71b977a1ccb7f43012247751000efe1d6b083f",
+        "src/ck3/data/climate.rs": "08e2964dfa4bb06902cd17399fbd81de78a24f900cd507fdb6e36e4fd2155679",
+        "src/ck3/data/combat.rs": "0dd19a1473d1112196c09d15ccaff8d1a94ff9ff88516e6bea1452b087798473",
+        "src/ck3/data/combat_effects.rs": "d7ebf25c473d506e3838d8c670ce305ee31caa249414db9537ed50b0b5d84edc",
+        "src/ck3/data/confederations.rs": "be763939d985d1ad01b1a23797d5dddc8e501ff99bb4e56283ae61f4fb3298c5",
+        "src/ck3/data/connection_arrows.rs": "71ac9c4e7414a9a47e13a6b9ef77b9ee9d3749eb478611f36f6f0ff2e10450af",
+        "src/ck3/data/council.rs": "a73957abac0dbc6a10edb489277cf34418498fe29c45ccbf1bc83e4843f0f349",
+        "src/ck3/data/court_scene.rs": "837a0a1c775db1f05836cfebfa948dc531bfbab5fd54941569bc2482b9f3e33b",
+        "src/ck3/data/court_type.rs": "72809959d299b71279149f317844f092e334a5bd7746b986c82071b501028c99",
+        "src/ck3/data/courtier_guest_mgmt.rs": "e509ec3ffdd3d70d95b6ff31b7140858255ce720eaad7be2757d0b4829cb95b6",
+        "src/ck3/data/courtpos.rs": "695fb95df62a2f7f39d1b120f168467ddfce16297062e59535b8710353309ae3",
+        "src/ck3/data/culture_history.rs": "1e6cf965e896405d37ccebd99f92a7c469a99a04414c2eb39d63c650641b125d",
+        "src/ck3/data/cultures.rs": "2f9ec7f58d04f8e43a590ec99974e1c5c00cbd93039c07e74f99b2e4a33364ad",
+        "src/ck3/data/deathreasons.rs": "26e15a7a520162205b134a40c2e3b3ac3869c444de4b2f4f00e8b317768bd6b6",
+        "src/ck3/data/decisions.rs": "43654ff32b5f44ebeb45592533cfb636c95a7d21a4727797aa3646983f2bee24",
+        "src/ck3/data/diarchies.rs": "fe4be9c197594761b5e1e0fab1e451c76d268509bb965e89f0403ae2b722ca61",
+        "src/ck3/data/difficulty.rs": "97c972596cae69c66507708590a5721ce1581262a2da739582d6592a4f39091b",
+        "src/ck3/data/doctrines.rs": "87f214940a6888eb74309e416754bb366a673f0fb96a79f33a56a0282848e598",
+        "src/ck3/data/domiciles.rs": "86433cb059b956d2786c7b8ae64d248ce5f171832c634a0b59d73dcf977ab08f",
+        "src/ck3/data/dynasties.rs": "540fdc00f13b67575093b04ca937de9f6c50286ae47151ed2904e92af7af1212",
+        "src/ck3/data/dynasty_legacies.rs": "90b9faac463f50d2e4d37d4127b7c8fd4c65d515f1916448ad8bad7e5473b7ca",
+        "src/ck3/data/election.rs": "2da1ca1d6246ec4ab16a3b16470c6ebaba53befbe8fa7e5e46de46ee1a0ec025",
+        "src/ck3/data/epidemics.rs": "77bf04e8b615a3c4e061ccbda77ea8d38dc1d8943edec65ebbd5bfaf97aec228",
+        "src/ck3/data/event_effect_2d.rs": "43f2d2628b3df80f9a18bfd2bf10a369539ea13533c4dd753a3ff0c264a23ba1",
+        "src/ck3/data/event_themes.rs": "e4b69f8140d3e69478f464c0d91b241acb69138dc1dfb60e1b5c0728401c0ce7",
+        "src/ck3/data/factions.rs": "64a1cd72ef4b4e78f021cde99b7766c3cd9e44c447f10f115c88fadaa7939de4",
+        "src/ck3/data/faith_history.rs": "81490b114a83811b472d89fc3ec6abe353a3ead9104b921d598d644b4947e445",
+        "src/ck3/data/flatmap.rs": "32ce8122f2ca51e5392a8b5c0de5042eccc6705722a6646ba7afa100ab5648a9",
+        "src/ck3/data/flavorization.rs": "e9f72e7f44eeedb386198b3ff4df9f4a457bea6c8a7b7a2b09394cc0a25c9401",
+        "src/ck3/data/focus.rs": "eb477a1caf3f328877c84db08f85c388d72ff7e2803171e8cee6ebd4a8f4dbac",
+        "src/ck3/data/fulfillment.rs": "1e3d96a32117edcddf254d8f9213bbfed8a601afc9890c17946e8933d98ba940",
+        "src/ck3/data/gameconcepts.rs": "e837484f6245a4f68776866c0708f40c4ae7acdbbca099002196b7fc6880c246",
+        "src/ck3/data/gamerules.rs": "d4abeb5bd3757284f85a0e2464c2076ffc823651a0e6337e73c37022cafdea05",
+        "src/ck3/data/government.rs": "fd41ecbd7517e0c4b88b532ce4368eee577d1a697bbd87602e2334da08d3f1bd",
+        "src/ck3/data/graphical_unit_types.rs": "947eaa4e3f4d91759690ba3ab7567800784c89674e966b5b0919b4240e42e60c",
+        "src/ck3/data/greatprojects.rs": "7b6aff6b10c150428421c0ace138db30e226563065f6d0b4a2eadfa6d0fca254",
+        "src/ck3/data/holdings.rs": "5f08c432352e1eeb2b94f82ba886c775c07abe1539a253879921dcf7fccabf05",
+        "src/ck3/data/holyorders.rs": "1c5c2aa30b22e34d26b2c4b7140ed996e7b42ef569b5f6098bfb33951e71d776",
+        "src/ck3/data/holysites.rs": "2690cf21014cfa3d3c1bbcade3c37dcaa105cc3c80eb4021c2b94d045d16f548",
+        "src/ck3/data/hooks.rs": "0d76af0492c59fa7e43b1483df9c259ab6da9bd8685705307d63af8d3d7e45f3",
+        "src/ck3/data/house_unities.rs": "d247c67b34ef0529c3cf44f519eaf987c07d05af3af9362e0dbc2ef4d62c099f",
+        "src/ck3/data/houses.rs": "3210da727ee5caf56a3b04a9fb7d19e208de50b1fc4b403442b46c3ae05fe318",
+        "src/ck3/data/important_actions.rs": "d55c0a2fdacabcdeab672baabc6a5fc9ef6ddb2a32e99226d6b707226b702f4e",
+        "src/ck3/data/innovations.rs": "f5fe5605a1d975c98f0a4d55b354d37d8a7d1f342bc4443444b713fe4cc577d7",
+        "src/ck3/data/inspirations.rs": "1dea7d7e6fc0d58ac479087d49318df3362459f01c055b878d07e9cb6b747a02",
+        "src/ck3/data/interaction_cats.rs": "aba1bcfa48415633d674a2bee53b5c3d134a8f0bcc8e7da36ede86c6ee5b20b3",
+        "src/ck3/data/interactions.rs": "3b69e32bc3f6de7794747f5782a3d42600455e696d52ef4015b25ea3c253fcac",
+        "src/ck3/data/laws.rs": "b741dd33e96bb091a8f6ba6a1cd0030d7cb6c970fff4fa0ee092b960ffebb7b6",
+        "src/ck3/data/lease_contracts.rs": "32bd58fc5c136a8fb7ca10f17904d8b476e676ece04b1dece7c5369fa610cca2",
+        "src/ck3/data/legends.rs": "a3c0577fdd8456c37f61e4ea17a11106ded6eca071f10b4ce731cf0429406e92",
+        "src/ck3/data/legitimacy.rs": "7766c0b9e178ba93a2e2f16a49f4a851ca910df40d22f59ebd5fafddc08a4fbb",
+        "src/ck3/data/lifestyles.rs": "e9097010105056e4672b0d7024e9ddd64c0ce234942321551a45a39d6a54dc24",
+        "src/ck3/data/lines.rs": "2fe2a5bbdd6b122d917ca1ba2354831d6fc54c0f0772d160c173a4b10a47a51f",
+        "src/ck3/data/maa.rs": "4f30c5440706f27c35daffc99288e150bce4031315bc5b11ac9ab25726da0649",
+        "src/ck3/data/map_environment.rs": "81deae02eecfdf82d5a7a756b61ae40ea4e91aadc2b9381e5df5c61e45a5e79b",
+        "src/ck3/data/mapmodes.rs": "9704ed0a9b1f6896a3dca77205eb5e9b1b02a0e5cb53e901ad64e683b36c7d1d",
+        "src/ck3/data/memories.rs": "7b82b258cc579421c4427e1808b2119f24feb95fa55436d77c4fb52d9be98cf1",
+        "src/ck3/data/menu_scenes.rs": "042b9846e29c9d9a428cd89147f7bd65c7d072d15609317c468fbf618a3cdbee",
+        "src/ck3/data/messages.rs": "10ee7edecf5dbf1fa482ab0233242ce679f765c37ec7ebd2dd33e96b2b75e56c",
+        "src/ck3/data/mod.rs": "27100ad8da565853f440e91cdf915edd9a4b0ec28d0a58e04fe6e51376f629b6",
+        "src/ck3/data/modif.rs": "9234916106a6ef78ea7c5262a813f9df032e9ae4e2b4c654283d436ded7e5d75",
+        "src/ck3/data/modifiers.rs": "0d67ec41f476879b45ca07eef13b2a7600ec8c7607164d179d866518a43eb2fb",
+        "src/ck3/data/morphemes.rs": "c03c429eed4ec2e38f88ff3d751dc8252d98d71a5ccffb8213946306ee1f3245",
+        "src/ck3/data/mottos.rs": "ddd628ff77ce98c2dc85bd0b09a2e0bec2716b441220b0aa74fc2b050c0e4a17",
+        "src/ck3/data/namelists.rs": "aa28a0790a9c89024da3a1657f491bccb027c35551a0824e88960c3e3ad18e40",
+        "src/ck3/data/nickname.rs": "097e35debc5a65816b26e691350f1e860fafcd8a0524bb531b7c85347473af9f",
+        "src/ck3/data/opinions.rs": "b63d2849206fd675651a4188de5e545b0314a29441e6458420c613169e7e6083",
+        "src/ck3/data/perks.rs": "b8de06053b01187af7cf84ada3f248338dd869ad604e347e8d96495544665a6c",
+        "src/ck3/data/points_of_interest.rs": "b6194eedaf569f8efabdd63b68c2f841768a57961b219b251399bc623941c490",
+        "src/ck3/data/pool.rs": "07a67ebad42ebbf75299c340a4a577d875d9c24032a1a2ff37016eb598d23b2d",
+        "src/ck3/data/portrait_types.rs": "41395487f028d74b00624f7d016ad96137b1228b3e6a59def1f6f2feb4a3198d",
+        "src/ck3/data/prov_effects.rs": "2603cab9e12db37d26568dfb4b6d87790f56914d132e8a1a3cf879d24f8f7e69",
+        "src/ck3/data/prov_history.rs": "a745ed305cf65f95a8535f4c20026361970f79dcf2fc276aafbb22057ea569aa",
+        "src/ck3/data/prov_terrain.rs": "e4fa5afbba2b3b1a28576bedae3b1fb88eb0373ec5d22c5c879506818b5c454a",
+        "src/ck3/data/provinces.rs": "829725667e2336da5cb7e783f24e8007f3e5c95c9943de4877be8566d440e6b0",
+        "src/ck3/data/puppets.rs": "8063901ef11bfe5c5394b210c8f402ca4beae20321438db0e61f7e32bc9fb192",
+        "src/ck3/data/raids.rs": "1005eda1d4acc397535898fea0c6d6ed61a62c1f46a08a5c3e8ed0e29edcea57",
+        "src/ck3/data/regions.rs": "5c172b26d9e78c2b915b054cb4ea1509cf56cc63ab7efa54bf7150b8d0e587d9",
+        "src/ck3/data/relations.rs": "26bed6f8e2b0420a9565e44c78360f26d95d928a6f5ccc8f59d44082bdde621c",
+        "src/ck3/data/religions.rs": "24ff8bf816d2703436133c7cd4915c75a67d03c690816a7ef117926db73a11eb",
+        "src/ck3/data/rites.rs": "4609558804e53b0936341706b023524a9967f22ad2b403c53f1526aabb553e2e",
+        "src/ck3/data/ruler_objectives.rs": "ecd42b6135e5f3152fe2f3d54dd426c15dac3a5c11ee14c203671d6878ab0df8",
+        "src/ck3/data/schemes.rs": "0fd1cf5e1628c2dbbca845ead2120eaee96010fa64d12cfb5a8ce9363c13ae66",
+        "src/ck3/data/scripted_animations.rs": "7281d34729eba6e08a42707e2a1be5da498174d6185aa04e4c516bc6eb2bf96b",
+        "src/ck3/data/scripted_costs.rs": "5a58f87d05c0132d795802661fdb531b30bf874a620c77910bdd52aac5fd34ae",
+        "src/ck3/data/scripted_illustrations.rs": "06f0e983c3dd53a521eb3edd4ba05ebb22b18041e8eb9c104c59dae9204b547a",
+        "src/ck3/data/secrets.rs": "9850c859e448e106f9192aac485fc60e2634745cc9c36f1eabcede51bf74ff76",
+        "src/ck3/data/situations.rs": "c1d0f180f2beeb729c5e00512ee7146a7ecf897027484ea58a015e5a970da1e1",
+        "src/ck3/data/stories.rs": "9d3d8fa45ca0370659b5348ebf5ddc08863ed4d03fe5fab9aef9abd8b00a884a",
+        "src/ck3/data/struggle.rs": "a240266e6936e9a7e6d9191f823d2afa3ae5b5b2fa81bb8019b24e140bea1ac7",
+        "src/ck3/data/subjectcontract.rs": "7e990aecae51d2a17b8334e160185ed7d91d2519f831221444d6b6d02194d8c8",
+        "src/ck3/data/succession.rs": "2c59f4c59aba28653f6a27714ead6f285eccc3236536b2b3409231feb82e8f79",
+        "src/ck3/data/suggestions.rs": "e249d5c80d59aacf8ac658b9e313a1d962ac39cca4f037bf4419d1f27c1bf9e5",
+        "src/ck3/data/table_styles.rs": "2500edba2a9a6eb2bcc6781be6164a71a78dc9406928d3c33594ebcd48c16e53",
+        "src/ck3/data/task_contracts.rs": "c07144b0aa4c8e7a59431d3f797cf62e5036ce58ddd74e5be994a6a8e6ec64bc",
+        "src/ck3/data/tax_slots.rs": "030c71de64fd5795063f5a4d20cd408cf61e7a34a253d5031921d436551ad1ab",
+        "src/ck3/data/tenets.rs": "37e03e66935014faab58aa7af15e9ec26a6a3a236584d4bd8c5997a70b294250",
+        "src/ck3/data/terrain.rs": "b10ee087bf8bba204a57ef0dfd9b9cb656053788141b319dd8554126db66b6f3",
+        "src/ck3/data/title_history.rs": "3c36679a39a7a99e44a0124bda35509acec205f490201eeded68b6f85a55ca51",
+        "src/ck3/data/titles.rs": "781cb65ca973d6b856c44983472aa5be1c4f83a090f7e9b779aa0b300d4e0a07",
+        "src/ck3/data/trait_portrait_modifiers.rs": "7304670b41ba0f602b22c3befe40a492beda1a10bf51405c1dc80acfd5ff0a4c",
+        "src/ck3/data/traits.rs": "699bdee8a424cca5acaa4b10395f32636259d440aa60571f21bdc55c84493ddc",
+        "src/ck3/data/travel.rs": "f310ecc1ae7b30ae97c561643152e8d3d65e3c000a6024008065548a7d8ee5e4",
+        "src/ck3/data/vassalstance.rs": "04858bf4d90f67ef972879f3bef5047ca402a0b174facd6e620eb09505135fa4",
+        "src/ck3/data/wars.rs": "aacf4b3252304d5e37e9581bf4ade8a0d8b61824d6abb92996f0685f99058065",
+        "src/ck3/effect_validation.rs": "f5382e765ca4ae452079741726d84e67b2d86e86e0960916f3c93d8beb887552",
+        "src/ck3/events.rs": "45cccfa2374d34e8e63a2e411308b6cfaf7efeca45f4841ed9a8de17ca9341a1",
+        "src/ck3/tables/defines.rs": "c4d1c4037a6b0765ba504d2fa45d3db584887a5197b2eae91f3e34826c287924",
+        "src/ck3/tables/effects.rs": "6918cd273aa17cf2c93a129cdbe7e39d30937019bcab249f2b31c8ad3529031e",
+        "src/ck3/tables/iterators.rs": "70c001a9b2a1733bfcea1e44fc03f7a5a40e6019c5c5d1170f6d03675e1fcd8c",
+        "src/ck3/tables/localization.rs": "051d75aa969165159de8d706734f6a7b02d19b77a4841ae027cbed4f3d2a340d",
+        "src/ck3/tables/misc.rs": "2c1091953f853e74c58c988166e3883ead12fcc07f1bc2a80f5b05d92cccf19a",
+        "src/ck3/tables/modifs.rs": "7b99c53cb1f3c159c8cb7c82116ecdb5a9eda13db3635e7bf8a68b08a710408a",
+        "src/ck3/tables/on_action.rs": "9fc05adf4881bfba96a62bf52de233dba57dd3105375bb2791d0d1469801863f",
+        "src/ck3/tables/rules.rs": "cdff517acebd91ae2c8602b315d741b0182ba44f48a0f4daec71c668651265b2",
+        "src/ck3/tables/sounds.rs": "a38f0e246cf11e561328cafbdace62a7973ba693d18ff68365d2a75efef31d77",
+        "src/ck3/tables/targets.rs": "a8946e0467cdac025a00860f3593da8637fa276059edc905399d4aff6b49b67e",
+        "src/ck3/tables/triggers.rs": "62a680ab530176691be0348c6ad433d8034a4f860de12008973e50e26c9b5dd1",
+        "src/ck3/validate.rs": "cebaac6e75ab24d67105160178e18011f1dbbe40917dc37cb185a55e596457b3",
+        "src/data/customloca.rs": "333f27bad8b09b7688c91162a61aaf4e504e065cc50771c94bdaa8ee0bd42368",
+        "src/data/effect_localization.rs": "9a805288570485e3e7d035ef5e3dd13b4d7739d54b47aee3a1b2f3b4a703825b",
+        "src/data/trigger_localization.rs": "2f2b1b228e785cec57df98c937683183e217eb5aacb503b290cf52440de8e2c9",
+        "src/gui/builtins.rs": "74444f23440699b029496302fb69fd596437c9158789b902354f788a8fdca850",
+        "src/gui/properties.rs": "cb98f00a7405ff13fe90f0fa74310469ecbce233bdb0a01c93a2b0306dbecd4a",
+        "tiger-tables/src/ck3/include/data_functions.rs": "d70d34f54cdf4326456e85430060a70debd13b0a15baf6f07e667871901222df",
+        "tiger-tables/src/ck3/include/data_global_functions.rs": "eeec30f7154b3225d807c12d6b9eb937fc7c72a1ebb3dbfd48eca3013203c4f1",
+        "tiger-tables/src/ck3/include/data_global_promotes.rs": "8ee0b0798720ad92b6f7beb09fdd88b4d20b0a853340f2461ad82b82497b325a",
+        "tiger-tables/src/ck3/include/data_promotes.rs": "948797d4e089f33c1cdefe0d86c9da7b9b9d220c218a01cdf3ffc64abd39e503"
+      }
+    },
+    "supplements": {
+      "scripts/tiger-sync/data/localization-builtins.manual.json": "707ad682ab5b161ce5d02796cea3073565b8131dfb22beb599d2907fcddb42a4",
+      "scripts/tiger-sync/data/localization-formats.manual.json": "f9cc5df71718afa30fd2b242d63fd4ceac259b48cd5baaa676e28f81988f7497",
+      "scripts/tiger-sync/data/localization-symbols.manual.json": "1e353875d137c24deca7933ef19c0076b016820e82019ebd2cda67f315a99067"
+    },
+    "generator": {
+      "scripts/build-grammars.js": "8244d674913e1950e44134c05fe4c1bacbd056921f505e11dacf289a9daee09f",
+      "scripts/tiger-sync/index.js": "14915aa3609e18b6347cd87cd704a3c37cfaced6c6c8de6315d5f1840b3b1d15",
+      "scripts/tiger-sync/lib/args.js": "8a039d211cbf8486b72580a8299897517817652e0060df58cbc853861006b740",
+      "scripts/tiger-sync/lib/canonical.js": "19b350a6e4a0cef3ba62ed57ed3e151a5779b2ad14d85a756fe48a6c495a5f38",
+      "scripts/tiger-sync/lib/feeds.js": "790a2d2edd5d767733796f5f93fc364e6e734ca3065171d6e9f15b7d21ddd713",
+      "scripts/tiger-sync/lib/generated.js": "279a19d78adc2cb38bc78840f40ea659fdebfce42a8a22a9ef59bc61502d187f",
+      "scripts/tiger-sync/lib/grammar-rules.js": "d0956ca00aa616867612008c3cf5b02afdf8e685885f2dc7b6873263c9374144",
+      "scripts/tiger-sync/lib/grammar-sources.js": "8ec24bf3683d2bc45c17047d11fbe97c25a5762961af2a51390588d5f7bb8663",
+      "scripts/tiger-sync/lib/grammars.js": "bf81f2a69d44583e3f50377ae702b36918b63e766d1f8ee02e5a8d5070247578",
+      "scripts/tiger-sync/lib/provenance.js": "5953e87d1122afafca748cbccf858d5e3547175de682360caf6c5e3c427016a2",
+      "scripts/tiger-sync/lib/report.js": "3c38849839a16b1e71259aaac94e7972482465b573dad9a23376b2298671499a",
+      "scripts/tiger-sync/lib/rust.js": "f24e9a8960b0626d02d8b136df98b8453c881d036aaddecc9a6759e53e032ba5",
+      "scripts/tiger-sync/lib/shared.js": "a5801b99fa1db32bde327b3c1e3efdb28d9f8d510d24b35f2445aede3297b49e"
+    },
+    "grammars": {
+      "grammars/ck3.json": "e8112d834f33c7a1f6da5d86fdf2fdf2a56b5493877fccdd71edc1c2584701a4",
+      "grammars/keywords/ck3-effects.json": "d4a9f2791f66d3ddbb07fc7a51f20b66ea162deba2fdf8e6e92f070e87c75737",
+      "grammars/keywords/ck3-event-targets.json": "0675d166e8ca7dc1f8408ec09644a4bbe35aaff16216cdb08e79501430a87011",
+      "grammars/keywords/ck3-modifiers.json": "28c5d6a1541658fe3a8a8832b398637b9fa194f56585b31d8c36cdb6bb34b490",
+      "grammars/keywords/ck3-scopes.json": "a1b48b4218e8fbcfb34888d80058744a8ac1c65f8e38e137643045ea7667aa2f",
+      "grammars/keywords/ck3-triggers.json": "7fade892c53c91892383c100b5792edb3826f9ffb814ae4b36422ddd964292bc",
+      "grammars/keywords/localization-builtin-macro.json": "12782170b3c0b5383ea1980f88bf740246dd32adf15430cc62f3bd0a4b4ba171",
+      "grammars/keywords/paradox-parameters-lhs.json": "c1448b931d0da509d0e9c47c9985f9d56bc103d08d2a4beef89cd931a5412e75",
+      "grammars/keywords/paradox-parameters-rhs.json": "553967bc2ab82f6f6cf7ad6479254e60fee078c746e55a70fb3ec7f46271f97f",
+      "grammars/localization.json": "3e322377f73a65948179392c4a1273293c5c5238ef32801b14796b2302edba8d",
+      "grammars/paradox.json": "4d51bec50a9f8560a4a578ccf3e64b5d33dd574ea992300522980a32b2d66fde",
+      "grammars/tiger/ck3-context.json": "56de6e57741245c2932114bb9e991ce2edf17d17c0698588e40fe72755074118",
+      "grammars/tiger/ck3-keywords.json": "99d32e9316c193f66e39842b1e59818934ea191a2691d9237a18025ee5cce038",
+      "grammars/tiger/ck3-static-tables.json": "e894fe394158ab7da34653ffad0bfa052eb1e01ca3dbc2672f0658e8fe235a4a",
+      "grammars/tiger/gui-symbols.json": "af1de019e71e0cbdfeacac6bfc2fc9f0414e2db35c022f1e32caf02743fbaf97",
+      "grammars/tiger/localization-builtins.json": "ff43cb03780f04ad8323b58446b9148d78662e4b39c7a0d00bf565e79be9516a",
+      "grammars/tiger/localization-symbols.json": "04398047c3bb85abf8751d613aab4c98cd6dd86e4b8d15093a2544181be6c323",
+      "grammars/tiger/paradox-parameters.json": "789dfd31540bbd076a500924d08f9e073050f9f7d22e915207d0fe989d08ad17",
+      "grammars/tiger/upstream.json": "d768a711dee6add65ba8e7867005a1c85709bf2c9c60b80bdc479c68461ca921"
+    }
+  },
+  "updateMode": {
+    "feeds": "replace",
+    "grammars": "additive",
+    "description": "Canonical Tiger snapshots replace extracted data; canonical keyword fragments preserve existing alternatives for backwards compatibility. Runtime grammars and feeds are rebuilt from repository sources."
+  },
+  "feeds": [
+    {
+      "id": "ck3-keywords",
+      "file": "ck3-keywords.json",
+      "description": "Core CK3 keyword lists extracted from ck3 tables.",
+      "sourceFiles": [
+        "src/ck3/tables/effects.rs",
+        "src/ck3/tables/triggers.rs",
+        "src/ck3/tables/targets.rs",
+        "src/ck3/tables/modifs.rs",
+        "src/ck3/tables/iterators.rs"
+      ],
+      "sections": [
+        {
+          "name": "effects",
+          "count": 2445,
+          "extractor": "tuple-field:SCOPE_EFFECT[1]+iterator-variants",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "ck3",
+              "repositoryKey": "effects",
+              "patternBuilder": "whole-word"
+            }
+          ]
+        },
+        {
+          "name": "triggers",
+          "count": 1419,
+          "extractor": "tuple-field:TRIGGER[1]+TRIGGER_COMPLEX[1]",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "ck3",
+              "repositoryKey": "triggers",
+              "patternBuilder": "whole-word"
+            }
+          ]
+        },
+        {
+          "name": "event_targets",
+          "count": 76,
+          "extractor": "tuple-field:SCOPE_PREFIX[1]",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "ck3",
+              "repositoryKey": "event_targets",
+              "patternBuilder": "event-target"
+            }
+          ]
+        },
+        {
+          "name": "scopes",
+          "count": 260,
+          "extractor": "tuple-field:SCOPE_TO_SCOPE[1]",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "ck3",
+              "repositoryKey": "scopes",
+              "patternBuilder": "scope-word"
+            }
+          ]
+        },
+        {
+          "name": "modifiers",
+          "count": 653,
+          "extractor": "tuple-field:MODIF_TABLE[0]",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "ck3",
+              "repositoryKey": "modifiers",
+              "patternBuilder": "whole-word"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ck3-context",
+      "file": "ck3-context.json",
+      "description": "CK3 built-in on_actions and scripted rule names extracted from tiger tables.",
+      "sourceFiles": [
+        "src/ck3/tables/on_action.rs",
+        "src/ck3/tables/rules.rs"
+      ],
+      "sections": [
+        {
+          "name": "on-actions",
+          "count": 223,
+          "extractor": "const-string:ON_ACTION_SCOPES top-level keys",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-lhs",
+              "patternBuilder": "parameters-lhs"
+            },
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-rhs",
+              "patternBuilder": "parameters-rhs"
+            }
+          ]
+        },
+        {
+          "name": "scripted-rules",
+          "count": 73,
+          "extractor": "const-string:SCRIPTED_RULES top-level keys",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "ck3",
+              "repositoryKey": "triggers",
+              "patternBuilder": "whole-word"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ck3-static-tables",
+      "file": "ck3-static-tables.json",
+      "description": "Static CK3 tiger tables tracked for future grammar and tooling use.",
+      "sourceFiles": [
+        "src/ck3/tables/defines.rs",
+        "src/ck3/tables/localization.rs",
+        "src/ck3/tables/misc.rs",
+        "src/ck3/tables/sounds.rs"
+      ],
+      "sections": [
+        {
+          "name": "defines",
+          "count": 2209,
+          "extractor": "tuple-field:DEFINES[0]",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "define-namespaces",
+          "count": 151,
+          "extractor": "split:DEFINES namespace",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "define-keys",
+          "count": 2170,
+          "extractor": "split:DEFINES key",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "sounds",
+          "count": 959,
+          "extractor": "const-array:SOUNDS",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "complex-tooltip-tags",
+          "count": 71,
+          "extractor": "tuple-field:COMPLEX_TOOLTIPS[0]",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "common-dirs",
+          "count": 177,
+          "extractor": "const-array:COMMON_DIRS",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "custom-religion-locas",
+          "count": 0,
+          "extractor": "const-array:CUSTOM_RELIGION_LOCAS",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "banned-title-history-types",
+          "count": 3,
+          "extractor": "const-array:BANNED_TITLE_HISTORY_TYPES",
+          "updateMode": "additive",
+          "targets": []
+        }
+      ]
+    },
+    {
+      "id": "paradox-parameters",
+      "file": "paradox-parameters.json",
+      "description": "CK3-specific shared Paradox parameter and value lists.",
+      "sourceFiles": [
+        "src/ck3/data/accolades.rs",
+        "src/ck3/data/activities.rs",
+        "src/ck3/data/ai_war_stances.rs",
+        "src/ck3/data/amenities.rs",
+        "src/ck3/data/artifacts.rs",
+        "src/ck3/data/bookmarks.rs",
+        "src/ck3/data/buildings.rs",
+        "src/ck3/data/casusbelli.rs",
+        "src/ck3/data/character_templates.rs",
+        "src/ck3/data/characters.rs",
+        "src/ck3/data/climate.rs",
+        "src/ck3/data/combat.rs",
+        "src/ck3/data/combat_effects.rs",
+        "src/ck3/data/confederations.rs",
+        "src/ck3/data/connection_arrows.rs",
+        "src/ck3/data/council.rs",
+        "src/ck3/data/court_scene.rs",
+        "src/ck3/data/court_type.rs",
+        "src/ck3/data/courtier_guest_mgmt.rs",
+        "src/ck3/data/courtpos.rs",
+        "src/ck3/data/culture_history.rs",
+        "src/ck3/data/cultures.rs",
+        "src/ck3/data/deathreasons.rs",
+        "src/ck3/data/decisions.rs",
+        "src/ck3/data/diarchies.rs",
+        "src/ck3/data/difficulty.rs",
+        "src/ck3/data/doctrines.rs",
+        "src/ck3/data/domiciles.rs",
+        "src/ck3/data/dynasties.rs",
+        "src/ck3/data/dynasty_legacies.rs",
+        "src/ck3/data/election.rs",
+        "src/ck3/data/epidemics.rs",
+        "src/ck3/data/event_effect_2d.rs",
+        "src/ck3/data/event_themes.rs",
+        "src/ck3/data/factions.rs",
+        "src/ck3/data/faith_history.rs",
+        "src/ck3/data/flatmap.rs",
+        "src/ck3/data/flavorization.rs",
+        "src/ck3/data/focus.rs",
+        "src/ck3/data/fulfillment.rs",
+        "src/ck3/data/gameconcepts.rs",
+        "src/ck3/data/gamerules.rs",
+        "src/ck3/data/government.rs",
+        "src/ck3/data/graphical_unit_types.rs",
+        "src/ck3/data/greatprojects.rs",
+        "src/ck3/data/holdings.rs",
+        "src/ck3/data/holyorders.rs",
+        "src/ck3/data/holysites.rs",
+        "src/ck3/data/hooks.rs",
+        "src/ck3/data/house_unities.rs",
+        "src/ck3/data/houses.rs",
+        "src/ck3/data/important_actions.rs",
+        "src/ck3/data/innovations.rs",
+        "src/ck3/data/inspirations.rs",
+        "src/ck3/data/interaction_cats.rs",
+        "src/ck3/data/interactions.rs",
+        "src/ck3/data/laws.rs",
+        "src/ck3/data/lease_contracts.rs",
+        "src/ck3/data/legends.rs",
+        "src/ck3/data/legitimacy.rs",
+        "src/ck3/data/lifestyles.rs",
+        "src/ck3/data/lines.rs",
+        "src/ck3/data/maa.rs",
+        "src/ck3/data/map_environment.rs",
+        "src/ck3/data/mapmodes.rs",
+        "src/ck3/data/memories.rs",
+        "src/ck3/data/menu_scenes.rs",
+        "src/ck3/data/messages.rs",
+        "src/ck3/data/mod.rs",
+        "src/ck3/data/modif.rs",
+        "src/ck3/data/modifiers.rs",
+        "src/ck3/data/morphemes.rs",
+        "src/ck3/data/mottos.rs",
+        "src/ck3/data/namelists.rs",
+        "src/ck3/data/nickname.rs",
+        "src/ck3/data/opinions.rs",
+        "src/ck3/data/perks.rs",
+        "src/ck3/data/points_of_interest.rs",
+        "src/ck3/data/pool.rs",
+        "src/ck3/data/portrait_types.rs",
+        "src/ck3/data/prov_effects.rs",
+        "src/ck3/data/prov_history.rs",
+        "src/ck3/data/prov_terrain.rs",
+        "src/ck3/data/provinces.rs",
+        "src/ck3/data/puppets.rs",
+        "src/ck3/data/raids.rs",
+        "src/ck3/data/regions.rs",
+        "src/ck3/data/relations.rs",
+        "src/ck3/data/religions.rs",
+        "src/ck3/data/rites.rs",
+        "src/ck3/data/ruler_objectives.rs",
+        "src/ck3/data/schemes.rs",
+        "src/ck3/data/scripted_animations.rs",
+        "src/ck3/data/scripted_costs.rs",
+        "src/ck3/data/scripted_illustrations.rs",
+        "src/ck3/data/secrets.rs",
+        "src/ck3/data/situations.rs",
+        "src/ck3/data/stories.rs",
+        "src/ck3/data/struggle.rs",
+        "src/ck3/data/subjectcontract.rs",
+        "src/ck3/data/succession.rs",
+        "src/ck3/data/suggestions.rs",
+        "src/ck3/data/table_styles.rs",
+        "src/ck3/data/task_contracts.rs",
+        "src/ck3/data/tax_slots.rs",
+        "src/ck3/data/tenets.rs",
+        "src/ck3/data/terrain.rs",
+        "src/ck3/data/title_history.rs",
+        "src/ck3/data/titles.rs",
+        "src/ck3/data/trait_portrait_modifiers.rs",
+        "src/ck3/data/traits.rs",
+        "src/ck3/data/travel.rs",
+        "src/ck3/data/vassalstance.rs",
+        "src/ck3/data/wars.rs",
+        "src/ck3/effect_validation.rs",
+        "src/ck3/events.rs",
+        "src/ck3/tables/misc.rs",
+        "src/ck3/validate.rs"
+      ],
+      "sections": [
+        {
+          "name": "parameters-lhs",
+          "count": 1949,
+          "extractor": "validator-fields",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-lhs",
+              "patternBuilder": "parameters-lhs"
+            }
+          ]
+        },
+        {
+          "name": "parameters-rhs",
+          "count": 749,
+          "extractor": "validator-choice+misc",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-rhs",
+              "patternBuilder": "parameters-rhs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gui-symbols",
+      "file": "gui-symbols.json",
+      "description": "GUI widget properties, builtins, and enumerated GUI value tokens.",
+      "sourceFiles": [
+        "guiproperties.txt",
+        "src/gui/builtins.rs",
+        "src/gui/properties.rs"
+      ],
+      "sections": [
+        {
+          "name": "widget-properties",
+          "count": 404,
+          "extractor": "enum:WidgetProperty+guiproperties",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-lhs",
+              "patternBuilder": "parameters-lhs"
+            }
+          ]
+        },
+        {
+          "name": "widget-types",
+          "count": 57,
+          "extractor": "enum:BuiltinWidget",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-lhs",
+              "patternBuilder": "parameters-lhs"
+            }
+          ]
+        },
+        {
+          "name": "widget-choice-values",
+          "count": 47,
+          "extractor": "gui-choice",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-rhs",
+              "patternBuilder": "parameters-rhs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "localization-symbols",
+      "file": "localization-symbols.json",
+      "description": "Localization helper fields and CK3 localization-key fields used across Jomini helpers and validators.",
+      "sourceFiles": [
+        "src/ck3/data/accolades.rs",
+        "src/ck3/data/activities.rs",
+        "src/ck3/data/ai_war_stances.rs",
+        "src/ck3/data/amenities.rs",
+        "src/ck3/data/artifacts.rs",
+        "src/ck3/data/bookmarks.rs",
+        "src/ck3/data/buildings.rs",
+        "src/ck3/data/casusbelli.rs",
+        "src/ck3/data/character_templates.rs",
+        "src/ck3/data/characters.rs",
+        "src/ck3/data/climate.rs",
+        "src/ck3/data/combat.rs",
+        "src/ck3/data/combat_effects.rs",
+        "src/ck3/data/confederations.rs",
+        "src/ck3/data/connection_arrows.rs",
+        "src/ck3/data/council.rs",
+        "src/ck3/data/court_scene.rs",
+        "src/ck3/data/court_type.rs",
+        "src/ck3/data/courtier_guest_mgmt.rs",
+        "src/ck3/data/courtpos.rs",
+        "src/ck3/data/culture_history.rs",
+        "src/ck3/data/cultures.rs",
+        "src/ck3/data/deathreasons.rs",
+        "src/ck3/data/decisions.rs",
+        "src/ck3/data/diarchies.rs",
+        "src/ck3/data/difficulty.rs",
+        "src/ck3/data/doctrines.rs",
+        "src/ck3/data/domiciles.rs",
+        "src/ck3/data/dynasties.rs",
+        "src/ck3/data/dynasty_legacies.rs",
+        "src/ck3/data/election.rs",
+        "src/ck3/data/epidemics.rs",
+        "src/ck3/data/event_effect_2d.rs",
+        "src/ck3/data/event_themes.rs",
+        "src/ck3/data/factions.rs",
+        "src/ck3/data/faith_history.rs",
+        "src/ck3/data/flatmap.rs",
+        "src/ck3/data/flavorization.rs",
+        "src/ck3/data/focus.rs",
+        "src/ck3/data/fulfillment.rs",
+        "src/ck3/data/gameconcepts.rs",
+        "src/ck3/data/gamerules.rs",
+        "src/ck3/data/government.rs",
+        "src/ck3/data/graphical_unit_types.rs",
+        "src/ck3/data/greatprojects.rs",
+        "src/ck3/data/holdings.rs",
+        "src/ck3/data/holyorders.rs",
+        "src/ck3/data/holysites.rs",
+        "src/ck3/data/hooks.rs",
+        "src/ck3/data/house_unities.rs",
+        "src/ck3/data/houses.rs",
+        "src/ck3/data/important_actions.rs",
+        "src/ck3/data/innovations.rs",
+        "src/ck3/data/inspirations.rs",
+        "src/ck3/data/interaction_cats.rs",
+        "src/ck3/data/interactions.rs",
+        "src/ck3/data/laws.rs",
+        "src/ck3/data/lease_contracts.rs",
+        "src/ck3/data/legends.rs",
+        "src/ck3/data/legitimacy.rs",
+        "src/ck3/data/lifestyles.rs",
+        "src/ck3/data/lines.rs",
+        "src/ck3/data/maa.rs",
+        "src/ck3/data/map_environment.rs",
+        "src/ck3/data/mapmodes.rs",
+        "src/ck3/data/memories.rs",
+        "src/ck3/data/menu_scenes.rs",
+        "src/ck3/data/messages.rs",
+        "src/ck3/data/mod.rs",
+        "src/ck3/data/modif.rs",
+        "src/ck3/data/modifiers.rs",
+        "src/ck3/data/morphemes.rs",
+        "src/ck3/data/mottos.rs",
+        "src/ck3/data/namelists.rs",
+        "src/ck3/data/nickname.rs",
+        "src/ck3/data/opinions.rs",
+        "src/ck3/data/perks.rs",
+        "src/ck3/data/points_of_interest.rs",
+        "src/ck3/data/pool.rs",
+        "src/ck3/data/portrait_types.rs",
+        "src/ck3/data/prov_effects.rs",
+        "src/ck3/data/prov_history.rs",
+        "src/ck3/data/prov_terrain.rs",
+        "src/ck3/data/provinces.rs",
+        "src/ck3/data/puppets.rs",
+        "src/ck3/data/raids.rs",
+        "src/ck3/data/regions.rs",
+        "src/ck3/data/relations.rs",
+        "src/ck3/data/religions.rs",
+        "src/ck3/data/rites.rs",
+        "src/ck3/data/ruler_objectives.rs",
+        "src/ck3/data/schemes.rs",
+        "src/ck3/data/scripted_animations.rs",
+        "src/ck3/data/scripted_costs.rs",
+        "src/ck3/data/scripted_illustrations.rs",
+        "src/ck3/data/secrets.rs",
+        "src/ck3/data/situations.rs",
+        "src/ck3/data/stories.rs",
+        "src/ck3/data/struggle.rs",
+        "src/ck3/data/subjectcontract.rs",
+        "src/ck3/data/succession.rs",
+        "src/ck3/data/suggestions.rs",
+        "src/ck3/data/table_styles.rs",
+        "src/ck3/data/task_contracts.rs",
+        "src/ck3/data/tax_slots.rs",
+        "src/ck3/data/tenets.rs",
+        "src/ck3/data/terrain.rs",
+        "src/ck3/data/title_history.rs",
+        "src/ck3/data/titles.rs",
+        "src/ck3/data/trait_portrait_modifiers.rs",
+        "src/ck3/data/traits.rs",
+        "src/ck3/data/travel.rs",
+        "src/ck3/data/vassalstance.rs",
+        "src/ck3/data/wars.rs",
+        "src/ck3/effect_validation.rs",
+        "src/ck3/events.rs",
+        "src/ck3/validate.rs",
+        "src/data/customloca.rs",
+        "src/data/effect_localization.rs",
+        "src/data/trigger_localization.rs"
+      ],
+      "sections": [
+        {
+          "name": "localization-fields",
+          "count": 33,
+          "extractor": "validator-fields",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "paradox",
+              "repositoryKey": "parameters-lhs",
+              "patternBuilder": "parameters-lhs"
+            }
+          ]
+        },
+        {
+          "name": "localization-key-fields",
+          "count": 85,
+          "extractor": "validator-item-fields:Item::Localization + manual-supplement",
+          "updateMode": "additive",
+          "targets": []
+        }
+      ]
+    },
+    {
+      "id": "localization-builtins",
+      "file": "localization-builtins.json",
+      "description": "Builtin localization macros and CK3 data function names extracted from tiger tables.",
+      "sourceFiles": [
+        "src/ck3/tables/localization.rs",
+        "tiger-tables/src/ck3/include/data_functions.rs",
+        "tiger-tables/src/ck3/include/data_global_functions.rs",
+        "tiger-tables/src/ck3/include/data_global_promotes.rs",
+        "tiger-tables/src/ck3/include/data_promotes.rs"
+      ],
+      "sections": [
+        {
+          "name": "builtin-macros",
+          "count": 527,
+          "extractor": "const-array:BUILTIN_MACROS + manual-supplement",
+          "updateMode": "additive",
+          "targets": [
+            {
+              "grammarId": "localization",
+              "repositoryKey": "builtin-macro",
+              "patternBuilder": "localization-token"
+            }
+          ]
+        },
+        {
+          "name": "builtin-scopes",
+          "count": 5,
+          "extractor": "manual-supplement",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "no-arg-functions",
+          "count": 8851,
+          "extractor": "tuple-field:*[0] filtered by Args::Args(&[])",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "with-arg-functions",
+          "count": 2443,
+          "extractor": "tuple-field:*[0] filtered by Args != Args::Args(&[])",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "global-promotes",
+          "count": 346,
+          "extractor": "tuple-field:GLOBAL_PROMOTES_CK3[0]",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "global-functions",
+          "count": 897,
+          "extractor": "tuple-field:GLOBAL_FUNCTIONS_CK3[0]",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "promotes",
+          "count": 1333,
+          "extractor": "tuple-field:PROMOTES_CK3[0]",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "functions",
+          "count": 9903,
+          "extractor": "tuple-field:FUNCTIONS_CK3[0]",
+          "updateMode": "additive",
+          "targets": []
+        },
+        {
+          "name": "receiver-types",
+          "count": 1250,
+          "extractor": "tuple-field:* receiver type",
+          "updateMode": "additive",
+          "targets": []
+        }
+      ]
+    }
+  ]
 }

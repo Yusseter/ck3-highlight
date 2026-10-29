@@ -1,0 +1,43 @@
+{
+  "scriptExtensions": [
+    ".txt",
+    ".gui",
+    ".gfx",
+    ".dlc",
+    ".sfx",
+    ".info",
+    ".map",
+    ".asset",
+    ".editordata",
+    ".particle2",
+    ".mod",
+    ".shortcuts",
+    ".settings",
+    ".modifierpack",
+    ".shader"
+  ],
+  "ck3GameExtensions": [
+    ".audio2",
+    ".compound",
+    ".font",
+    ".heightmap",
+    ".lines",
+    ".lookup",
+    ".particle",
+    ".skin",
+    ".terrain",
+    ".vertical_borders"
+  ],
+  "ck3Filenames": [
+    "ck3-tiger.conf"
+  ],
+  "ck3": {
+    "paths": [
+      "Crusader Kings III",
+      "CK",
+      "CK3",
+      "1158310"
+    ],
+    "extension": ".ck3"
+  }
+}

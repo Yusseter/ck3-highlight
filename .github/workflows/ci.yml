@@ -1,0 +1,30 @@
+name: Check Extension
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - run: npm install --global pnpm@11.25.0 --ignore-scripts
+      - run: pnpm install --frozen-lockfile
+      - if: runner.os == 'Windows'
+        run: pnpm run check
+      - if: runner.os == 'Windows'
+        run: pnpm test
+      - if: runner.os == 'Linux'
+        run: pnpm run package

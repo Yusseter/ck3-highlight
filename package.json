@@ -1,162 +1,246 @@
 {
-	"name": "ck3-highlight",
-	"displayName": "Crusader Kings III Highlight",
-	"description": "Syntax highlight for Crusader Kings III script files",
-	"version": "0.0.3",
-	"publisher": "Yusseter",
-	"icon": "icon.png",
-	"readme": "README.md",
-	"author": { "name": "Yusseter" },
-	"engines": { "vscode": "^1.107.0" },
-	"categories": [ "Programming Languages" ],
-	"keywords": [
-		"syntax",
-		"highlight",
-		"paradox",
-		"crusader kings",
-		"crusader kings 3",
-		"ck",
-		"ck3"
-	],
-	"bugs": { "url": "https://github.com/Yusseter/ck3-highlight/issues" },
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Yusseter/ck3-highlight.git"
-	},
-	"homepage": "https://github.com/Yusseter/ck3-highlight",
-	"qna": "https://github.com/Yusseter/ck3-highlight/issues",
-	"scripts": { "sync:ck3-tiger": "node ./scripts/sync-ck3-tiger.js" },
-	"contributes": {
-		"configurationDefaults": {
-			"editor.semanticTokenColorCustomizations": {
-				"rules": {
-					"scriptedParameter": {
-						"bold": false
-					}
-				}
-			},
-			"[ck3]": {
-				"editor.semanticHighlighting.enabled": true
-			},
-			"[paradox]": {
-				"editor.semanticHighlighting.enabled": true
-			}
-		},
-		"semanticTokenTypes": [
-			{
-				"id": "scriptedParameter",
-				"description": "Parameter key used in scripted CK3 call sites",
-				"superType": "parameter"
-			}
-		],
-		"semanticTokenScopes": [
-			{
-				"language": "ck3",
-				"scopes": {
-					"scriptedParameter": [
-						"variable.parameter"
-					]
-				}
-			},
-			{
-				"language": "paradox",
-				"scopes": {
-					"scriptedParameter": [
-						"variable.parameter"
-					]
-				}
-			}
-		],
-		"languages": [
-			{
-				"id": "ck3",
-				"aliases": [ "ParadoxScript CK3" ],
-	  			"extensions": [ ".ck3" ],
-				"configuration": "./language-configuration.json",
-				"filenamePatterns": [ "**/{Crusader Kings III,CK,CK3,1158310}/{**, mod}/*.{ck3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}" ],
-				"icon": {
-					"light": "./icons/paradox_black.png",
-					"dark": "./icons/paradox_white.png"
-				}
-			},
-			{
-				"id": "paradox",
-				"aliases": [ "ParadoxScript" ],
-				"extensions": [
-					".eu4",
-					".eu5",
-					".hoi4",
-					".vic3",
-					".gui",
-					".gfx",
-					".dlc",
-					".sfx",
-					".info",
-					".map",
-					".asset",
-					".editordata",
-					".particle2",
-					".mod",
-					".shortcuts",
-					".settings",
-					".modifierpack",
-					"shader"
-				],
-				"filenamePatterns": [
-					"**/{Europa Universalis IV,EU4,236850}/{**, mod}/*.{eu4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}",
-					"**/{Hearts of Iron IV,HOI,HOI4,394360}/{**, mod}/*.{hoi4,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}",
-					"**/{Victoria 3,VIC,VIC3,529340}/{**, mod}/*.{vic3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}",
-					"**/{Europa Universalis V,EU,EU5,3450310}/{**, mod}/*.{eu5,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}"
-				],
-				"configuration": "./language-configuration.json",
-				"icon": {
-					"light": "./icons/paradox_black.png",
-					"dark": "./icons/paradox_white.png"
-				}
-			}
-		],
-		"grammars": [
-			{
-				"language": "ck3",
-				"scopeName": "source.paradox.ck3",
-				"path": "./syntaxes/ck3.tmLanguage.json",
-				"injectTo": [ "source.paradox" ],
-				"unbalancedBracketScopes": [
-					"meta.calculation.paradox",
-					"punctuation.section.calculation.begin.paradox",
-					"punctuation.section.calculation.end.paradox"
-				]
-			},
-			{
-				"language": "paradox",
-				"scopeName": "source.paradox",
-				"path": "./syntaxes/paradox.tmLanguage.json",
-				"unbalancedBracketScopes": [
-					"meta.calculation.paradox",
-					"punctuation.section.calculation.begin.paradox",
-					"punctuation.section.calculation.end.paradox"
-				]
-			},
-			{
-				"scopeName": "source.paradox.loc",
-				"injectTo": [
-					"source.paradox",
-					"source.yaml"
-				],
-				"path": "./syntaxes/localization.tmLanguage.json"
-			}
-		],
-		"commands": [
-			{
-				"command": "paradox-highlight.format",
-				"title": "Format Paradox Scripts"
-			}
-		]
-	},
-	"main": "./src/extension.js",
-	"activationEvents": [
-		"onLanguage:ck3",
-		"onLanguage:paradox",
-		"onLanguage:yaml"
-	]
+  "name": "ck3-highlight",
+  "displayName": "Crusader Kings III Highlight",
+  "description": "Syntax highlight for Crusader Kings III script files",
+  "version": "0.0.4",
+  "license": "GPL-3.0-or-later",
+  "publisher": "Yusseter",
+  "icon": "icons/icon.png",
+  "readme": "README.md",
+  "author": {
+    "name": "Yusseter"
+  },
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "syntax",
+    "highlight",
+    "paradox",
+    "crusader kings",
+    "crusader kings 3",
+    "ck",
+    "ck3",
+    "jomini",
+    "paradox-script",
+    "localization",
+    "modding",
+    "syntax-highlighting"
+  ],
+  "bugs": {
+    "url": "https://github.com/Yusseter/ck3-highlight/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yusseter/ck3-highlight.git"
+  },
+  "homepage": "https://github.com/Yusseter/ck3-highlight",
+  "qna": "https://github.com/Yusseter/ck3-highlight/issues",
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "build": "node scripts/build-file-types.js && node scripts/build-grammars.js",
+    "build:file-types": "node scripts/build-file-types.js",
+    "build:grammars": "node scripts/build-grammars.js",
+    "test": "node --test test/*.test.js",
+    "test:integration": "node scripts/test-integration.js",
+    "test:project": "node scripts/test-project.js",
+    "check": "prettier --check . && node scripts/check.js",
+    "package": "pnpm run check && node --test test/*.test.js && node -e \"require('node:fs').mkdirSync('dist', {recursive:true})\" && vsce package --no-dependencies --out dist/",
+    "sync:ck3-tiger": "node ./scripts/sync-ck3-tiger.js"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "4.0.0",
+    "prettier": "3.9.10",
+    "vscode-oniguruma": "2.0.1",
+    "vscode-textmate": "9.3.2"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Syntax highlighting and editing work without trust; external CK3 mod indexing requires a trusted workspace.",
+      "restrictedConfigurations": [
+        "ck3Highlight.gamePath",
+        "ck3Highlight.modPath",
+        "ck3tiger.ck3Path",
+        "ck3tiger.modPath"
+      ]
+    },
+    "virtualWorkspaces": {
+      "supported": false
+    }
+  },
+  "contributes": {
+    "configuration": {
+      "title": "CK3 Highlight",
+      "properties": {
+        "ck3Highlight.autoDetect": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect CK3 localization headers and CK3 mod projects."
+        },
+        "ck3Highlight.semantic.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Highlight parameters in scripted CK3 calls."
+        },
+        "ck3Highlight.gamePath": {
+          "type": "string",
+          "default": "",
+          "scope": "window",
+          "description": "CK3 installation root containing the game subdirectory. Falls back to ck3tiger.ck3Path."
+        },
+        "ck3Highlight.modPath": {
+          "type": "string",
+          "default": "",
+          "scope": "window",
+          "description": "Active CK3 mod directory or descriptor file for this window. Falls back to ck3tiger.modPath."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "editor.semanticTokenColorCustomizations": {
+        "rules": {
+          "scriptedParameter": {
+            "bold": false
+          }
+        }
+      },
+      "[ck3]": {
+        "editor.semanticHighlighting.enabled": true
+      }
+    },
+    "semanticTokenTypes": [
+      {
+        "id": "scriptedParameter",
+        "description": "Parameter key used in scripted CK3 call sites",
+        "superType": "parameter"
+      }
+    ],
+    "semanticTokenScopes": [
+      {
+        "language": "ck3",
+        "scopes": {
+          "scriptedParameter": [
+            "variable.parameter"
+          ]
+        }
+      }
+    ],
+    "languages": [
+      {
+        "id": "ck3-localization",
+        "aliases": [
+          "CK3 Localization"
+        ],
+        "filenamePatterns": [
+          "*_l_*.yml",
+          "*_l_*.yaml"
+        ],
+        "firstLine": "^\\uFEFF?[\\t ]*l_[A-Za-z_]+:[\\t ]*(?:#.*)?$",
+        "configuration": "./localization-language-configuration.json",
+        "icon": {
+          "light": "./icons/ck3-light.png",
+          "dark": "./icons/ck3-dark.png"
+        }
+      },
+      {
+        "id": "ck3",
+        "aliases": [
+          "CK3 Script",
+          "ParadoxScript CK3"
+        ],
+        "extensions": [
+          ".ck3"
+        ],
+        "configuration": "./language-configuration.json",
+        "filenamePatterns": [
+          "**/{Crusader Kings III,CK,CK3,1158310}/**/*.{ck3,txt,gui,gfx,dlc,sfx,info,map,asset,editordata,particle2,mod,shortcuts,settings,modifierpack,shader}",
+          "**/{Crusader Kings III,CK,CK3}/game/**/*.{audio2,compound,font,heightmap,lines,lookup,particle,skin,terrain,vertical_borders}",
+          "**/1158310/**/*.{audio2,compound,font,heightmap,lines,lookup,particle,skin,terrain,vertical_borders}"
+        ],
+        "icon": {
+          "light": "./icons/ck3-light.png",
+          "dark": "./icons/ck3-dark.png"
+        },
+        "filenames": [
+          "ck3-tiger.conf"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ck3-localization",
+        "scopeName": "source.paradox.localization",
+        "path": "./syntaxes/localization/yaml.tmLanguage.json"
+      },
+      {
+        "scopeName": "source.paradox.localization.1.0",
+        "path": "./syntaxes/localization/yaml-1.0.tmLanguage.json"
+      },
+      {
+        "scopeName": "source.paradox.localization.1.1",
+        "path": "./syntaxes/localization/yaml-1.1.tmLanguage.json"
+      },
+      {
+        "scopeName": "source.paradox.localization.1.2",
+        "path": "./syntaxes/localization/yaml-1.2.tmLanguage.json"
+      },
+      {
+        "scopeName": "source.paradox.localization.1.3",
+        "path": "./syntaxes/localization/yaml-1.3.tmLanguage.json"
+      },
+      {
+        "scopeName": "source.paradox.localization.embedded",
+        "path": "./syntaxes/localization/yaml-embedded.tmLanguage.json"
+      },
+      {
+        "language": "ck3",
+        "scopeName": "source.paradox.ck3",
+        "path": "./syntaxes/ck3.tmLanguage.json",
+        "injectTo": [
+          "source.paradox"
+        ],
+        "unbalancedBracketScopes": [
+          "meta.calculation.paradox",
+          "punctuation.section.calculation.begin.paradox",
+          "punctuation.section.calculation.end.paradox"
+        ]
+      },
+      {
+        "scopeName": "source.paradox",
+        "path": "./syntaxes/paradox.tmLanguage.json",
+        "unbalancedBracketScopes": [
+          "meta.calculation.paradox",
+          "punctuation.section.calculation.begin.paradox",
+          "punctuation.section.calculation.end.paradox"
+        ]
+      },
+      {
+        "scopeName": "source.paradox.loc",
+        "injectTo": [
+          "source.paradox",
+          "source.paradox.ck3",
+          "source.paradox.localization"
+        ],
+        "path": "./syntaxes/localization.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "paradox-highlight.format",
+        "title": "Format CK3 Scripts"
+      }
+    ]
+  },
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onLanguage:yaml",
+    "workspaceContains:descriptor.mod",
+    "workspaceContains:ck3-tiger.conf"
+  ]
 }

@@ -1,0 +1,747 @@
+{
+  "name": "Paradox Script Language",
+  "scopeName": "source.paradox",
+  "uuid": "24081801-bdcf-11ee-8000-44e517e8033d",
+  "patterns": [
+    {
+      "include": "#namespace"
+    },
+    {
+      "include": "#code"
+    }
+  ],
+  "repository": {
+    "block": {
+      "comment": "= block",
+      "begin": "(?<==)\\s*({)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.section.block.begin.paradox"
+        }
+      },
+      "end": "}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.block.end.paradox"
+        }
+      },
+      "contentName": "meta.block.paradox",
+      "patterns": [
+        {
+          "include": "#code"
+        }
+      ]
+    },
+    "code": {
+      "comment": "This is the main entry-point",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#localization-key-assignment"
+        },
+        {
+          "include": "#define-blocks"
+        },
+        {
+          "include": "#quoted-localization-expression-assignment"
+        },
+        {
+          "include": "#statement"
+        },
+        {
+          "include": "#rhs-item"
+        }
+      ]
+    },
+    "comment": {
+      "comment": "A line starting with # is a comment",
+      "begin": "#",
+      "end": "$\\n?",
+      "name": "comment.line.number-sign.paradox"
+    },
+    "comparable-lhs": {
+      "comment": "LHS + comparison operator",
+      "begin": "\\s*(?=[\\w:.|$]+\\s*(?:<=|>=|!=|<|>))",
+      "end": "\\s*(<=|>=|!=|<|>)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.comparison.paradox"
+        }
+      },
+      "contentName": "meta.lhs.comparable.paradox",
+      "patterns": [
+        {
+          "include": "#calculation"
+        },
+        {
+          "include": "#prefix-scopes"
+        },
+        {
+          "include": "#non-prefixable-comparable-lhs"
+        },
+        {
+          "include": "#prefixable-comparable-lhs"
+        }
+      ]
+    },
+    "comparable-rhs": {
+      "begin": "(?<=<=|>=|!=|<|>)\\s*(?=[^{\\s])",
+      "end": "\\s+",
+      "contentName": "meta.id.paradox.rhs.comparable",
+      "patterns": [
+        {
+          "include": "#calculation"
+        },
+        {
+          "include": "#date"
+        },
+        {
+          "include": "#hex-color"
+        },
+        {
+          "include": "#numeric"
+        },
+        {
+          "include": "#reader-directive"
+        },
+        {
+          "include": "#prefix-scopes"
+        },
+        {
+          "include": "#non-prefixable-comparable-rhs"
+        },
+        {
+          "include": "#prefixable-comparable-rhs"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "calculation": {
+      "begin": "(@)\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.calculation.begin.paradox"
+        },
+        "1": {
+          "name": "markup.italic"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.calculation.end.paradox"
+        }
+      },
+      "contentName": "meta.calculation.paradox",
+      "patterns": [
+        {
+          "include": "#numeric"
+        },
+        {
+          "include": "#script_constants"
+        },
+        {
+          "match": "\\b[\\w.]+\\b",
+          "name": "variable.other.identifier.paradox"
+        },
+        {
+          "match": "[()+\\-*/]",
+          "name": "keyword.operator.arithmetic.paradox"
+        }
+      ]
+    },
+    "date": {
+      "comment": "Dot-seperated date (-1000.10.10)",
+      "match": "(?<![A-Za-z0-9_.])-?\\d+\\.\\d+\\.\\d+\\b",
+      "name": "constant.numeric.date.paradox"
+    },
+    "identifier": {
+      "patterns": [
+        {
+          "include": "#script_constants"
+        },
+        {
+          "include": "#reader-directive"
+        },
+        {
+          "include": "#macro"
+        },
+        {
+          "match": "\\b(?:block|blockoverride|scripted_trigger|scripted_effect|template|type|types)\\b",
+          "name": "storage.type.paradox"
+        },
+        {
+          "match": "\\b[\\w:|]+\\b",
+          "name": "variable.other.identifier.paradox"
+        }
+      ]
+    },
+    "lhs": {
+      "patterns": [
+        {
+          "include": "#non-comparable-lhs"
+        },
+        {
+          "include": "#comparable-lhs"
+        }
+      ]
+    },
+    "macro": {
+      "match": "(\\$)[\\w:|]+(\\$)",
+      "name": "markup.italic variable.parameter.macro.paradox",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.macro.begin.paradox"
+        },
+        "2": {
+          "name": "punctuation.definition.macro.end.paradox"
+        }
+      }
+    },
+    "namespace": {
+      "comment": "Namespace at top of events",
+      "match": "^\\s*((namespace)\\s*[=]\\s*([\\w.]+))",
+      "name": "meta.namespace.paradox",
+      "captures": {
+        "1": {
+          "name": "meta.namespace.identifier.paradox"
+        },
+        "2": {
+          "name": "keyword.other.namespace.paradox"
+        },
+        "3": {
+          "name": "entity.name.type.namespace.paradox"
+        }
+      }
+    },
+    "non-comparable-lhs": {
+      "comment": "LHS + =",
+      "begin": "\\s*(?=[\\w:.|$@-]+\\s*(?:\\?=|=))",
+      "end": "\\s*(\\?=|=)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.equal.paradox"
+        }
+      },
+      "contentName": "meta.lhs.non-comparable.paradox",
+      "patterns": [
+        {
+          "include": "#calculation"
+        },
+        {
+          "include": "#date"
+        },
+        {
+          "include": "#reader-directive"
+        },
+        {
+          "include": "#prefix-scopes"
+        },
+        {
+          "include": "#non-prefixable-non-comparable-lhs"
+        },
+        {
+          "include": "#prefixable-non-comparable-lhs"
+        }
+      ]
+    },
+    "non-comparable-rhs": {
+      "begin": "(?<=\\?=|=)\\s*(?=[^{\\s])",
+      "end": "\\s+",
+      "contentName": "meta.id.paradox.rhs.non-comparable",
+      "patterns": [
+        {
+          "include": "#calculation"
+        },
+        {
+          "include": "#date"
+        },
+        {
+          "include": "#hex-color"
+        },
+        {
+          "include": "#numeric"
+        },
+        {
+          "include": "#reader-directive"
+        },
+        {
+          "include": "#prefix-scopes"
+        },
+        {
+          "include": "#non-prefixable-non-comparable-rhs"
+        },
+        {
+          "include": "#prefixable-non-comparable-rhs"
+        },
+        {
+          "include": "#comment"
+        }
+      ]
+    },
+    "non-prefixable-comparable-lhs": {
+      "begin": "(?<!\\.)(?=[\\w:|$]+)",
+      "end": "(?![\\w:|$])",
+      "contentName": "meta.id.paradox.comparable.non-prefixed",
+      "patterns": [
+        {
+          "include": "#prefixable-comparable-lhs"
+        }
+      ]
+    },
+    "non-prefixable-comparable-rhs": {
+      "begin": "(?<!\\.)(?=[\\w:|$\"@]+)",
+      "end": "(?![\\w:|$\"@])",
+      "contentName": "meta.id.paradox.rhs.comparable.non-prefixed",
+      "patterns": [
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#script_constants"
+        },
+        {
+          "include": "#prefixable-comparable-rhs"
+        }
+      ]
+    },
+    "non-prefixable-non-comparable-lhs": {
+      "begin": "(?<!\\.)(?=[\\w:|$@-]+)",
+      "end": "(?![\\w:|$@-])",
+      "contentName": "meta.id.paradox.non-comparable.non-prefixed",
+      "patterns": [
+        {
+          "comment": "Numbers",
+          "match": "\\b\\d+\\b",
+          "name": "constant.numeric.paradox"
+        },
+        {
+          "comment": "LHS boolean operators",
+          "match": "(?i)\\b(?:or|and|not|nor|nand)\\b",
+          "name": "markup.bold keyword.operator.logical.paradox"
+        },
+        {
+          "comment": "Other LHS operators",
+          "match": "\\b(?:limit|if|else|else_if|trigger_if|trigger_else|trigger_else_if|while|switch|alternative_limit|continue|filter)\\b",
+          "name": "markup.bold keyword.control.flow.paradox"
+        },
+        {
+          "match": "\\b(?:add_to_temporary_list|assert_if|assert_read|custom_description|custom_tooltip|debug_log|save_temporary_opinion_value_as|save_temporary_scope_as|save_temporary_scope_value_as|save_temporary_value_as)\\b",
+          "name": "markup.bold variable.language.multi.paradox"
+        },
+        {
+          "include": "#parameters-lhs"
+        },
+        {
+          "include": "#script_constants"
+        },
+        {
+          "include": "#prefixable-non-comparable-lhs"
+        },
+        {
+          "include": "#non-prefixable-comparable-lhs"
+        }
+      ]
+    },
+    "non-prefixable-non-comparable-rhs": {
+      "begin": "(?<!\\.)(?=[\\w:|$\"@]+)",
+      "end": "(?![\\w:|$\"@])",
+      "contentName": "meta.id.paradox.rhs.non-comparable.non-prefixed",
+      "patterns": [
+        {
+          "match": "\\b(?:yes|no)\\b",
+          "name": "markup.bold constant.language.paradox"
+        },
+        {
+          "include": "#parameters-rhs"
+        },
+        {
+          "include": "#script_constants"
+        },
+        {
+          "begin": "\\|(?=\\w+)",
+          "beginCaptures": {
+            "0": {
+              "name": "markup.bold punctuation.definition.bar.paradox"
+            }
+          },
+          "end": "(?<=\\w)\\b",
+          "patterns": [
+            {
+              "include": "#non-prefixable-non-comparable-rhs"
+            }
+          ]
+        },
+        {
+          "include": "#non-prefixable-comparable-rhs"
+        },
+        {
+          "include": "#prefixable-non-comparable-rhs"
+        }
+      ]
+    },
+    "numeric": {
+      "comment": "A RHS number, either integer or float, positive or negative",
+      "match": "(?<![A-Za-z0-9_])-?(?:(?:\\d+(?:\\.\\d+)?%?)|(?:\\.\\d+))(?![A-Za-z0-9_])",
+      "name": "constant.numeric.paradox"
+    },
+    "reader-directive": {
+      "match": "(@:)((?i:define|insert|log|load_variable|register_variable|assert))\\b",
+      "name": "markup.bold meta.directive.paradox",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.directive.paradox"
+        },
+        "2": {
+          "name": "keyword.control.directive.paradox"
+        }
+      }
+    },
+    "hex-color": {
+      "comment": "Hex color block, scopes inner hex digits",
+      "begin": "(?i)(?<=\\bhex\\s*)(?=\\{)\\s*",
+      "end": "\\s*\\}",
+      "patterns": [
+        {
+          "match": "\\b[0-9A-Fa-f]{6}\\b",
+          "name": "constant.numeric.hex.paradox"
+        }
+      ]
+    },
+    "parameters-lhs": {
+      "match": {
+        "patternBuilder": "parameters-lhs",
+        "fragments": "keywords/paradox-parameters-lhs.json"
+      },
+      "name": "markup.bold support.constant.parameter.lhs.paradox"
+    },
+    "parameters-lhs-comparable": {
+      "match": "\\b(?:value|count|percent|amount)\\b",
+      "name": "markup.bold support.constant.parameter.lhs.paradox"
+    },
+    "parameters-rhs": {
+      "match": {
+        "patternBuilder": "parameters-rhs",
+        "fragments": "keywords/paradox-parameters-rhs.json"
+      },
+      "name": "markup.italic support.constant.parameter.rhs.paradox"
+    },
+    "parameters-rhs-comparable": {
+      "match": "\\b(?:strongly_approve|approve|neutral|disapporve|strongly_disapprove)\\b",
+      "name": "markup.italic support.constant.parameter.rhs.paradox.ck3"
+    },
+    "prefix-scopes": {
+      "begin": "(?<!/)\\b(?=[\\w:|$]+\\.)",
+      "end": "\\.",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.dot.paradox"
+        }
+      },
+      "contentName": "meta.scope.paradox",
+      "patterns": [
+        {
+          "include": "#scope"
+        },
+        {
+          "include": "#identifier"
+        }
+      ]
+    },
+    "prefixable-comparable-lhs": {
+      "begin": "(?=[\\w:|$]+)",
+      "end": "(?![\\w:|$])",
+      "contentName": "meta.id.paradox.comparable.prefixed",
+      "patterns": [
+        {
+          "include": "#scope"
+        },
+        {
+          "include": "#parameters-lhs-comparable"
+        },
+        {
+          "include": "#identifier"
+        }
+      ]
+    },
+    "prefixable-comparable-rhs": {
+      "begin": "(?=[\\w:|$]+)",
+      "end": "(?![\\w:|$])",
+      "contentName": "meta.id.paradox.rhs.comparable.prefixed",
+      "patterns": [
+        {
+          "include": "#scope"
+        },
+        {
+          "include": "#parameters-rhs-comparable"
+        },
+        {
+          "include": "#identifier"
+        }
+      ]
+    },
+    "prefixable-non-comparable-lhs": {
+      "begin": "(?=[\\w:|$]+)",
+      "end": "(?![\\w:|$])",
+      "contentName": "meta.id.paradox.non-comparable.prefixed",
+      "patterns": [
+        {
+          "include": "#scope"
+        },
+        {
+          "include": "#prefixable-comparable-lhs"
+        }
+      ]
+    },
+    "prefixable-non-comparable-rhs": {
+      "begin": "(?=[\\w:|$]+)",
+      "end": "(?![\\w:|$])",
+      "contentName": "meta.id.paradox.rhs.non-comparable.prefixed",
+      "patterns": [
+        {
+          "include": "#scope"
+        },
+        {
+          "include": "#prefixable-comparable-rhs"
+        }
+      ]
+    },
+    "rhs": {
+      "patterns": [
+        {
+          "include": "#block"
+        },
+        {
+          "include": "#comparable-rhs"
+        },
+        {
+          "include": "#non-comparable-rhs"
+        }
+      ]
+    },
+    "rhs-item": {
+      "patterns": [
+        {
+          "include": "#calculation"
+        },
+        {
+          "include": "#hex-color"
+        },
+        {
+          "include": "#numeric"
+        },
+        {
+          "include": "#reader-directive"
+        },
+        {
+          "include": "#non-prefixable-non-comparable-rhs"
+        },
+        {
+          "include": "#prefixable-non-comparable-rhs"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#identifier"
+        }
+      ]
+    },
+    "scope": {
+      "comment": "Original relative scope change",
+      "match": "(?i)\\b(?:root|from|prev|this)\\b",
+      "name": "markup.bold support.type.scope.paradox"
+    },
+    "script_constants": {
+      "comment": "A predef script variable (@variable)",
+      "match": "(?<!\\w)@\\w+",
+      "name": "variable.language.predef.paradox"
+    },
+    "statement": {
+      "patterns": [
+        {
+          "include": "#lhs"
+        },
+        {
+          "include": "#rhs"
+        }
+      ]
+    },
+    "strings": {
+      "begin": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.paradox"
+        }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.paradox"
+        }
+      },
+      "name": "string.quoted.double.paradox",
+      "patterns": [
+        {
+          "include": "#sound-string"
+        },
+        {
+          "match": "\\\\[n\"]",
+          "name": "constant.character.escape.paradox"
+        }
+      ]
+    },
+    "localization-key-assignment": {
+      "begin": null,
+      "beginCaptures": {
+        "1": {
+          "name": "markup.bold support.constant.parameter.lhs.paradox"
+        },
+        "3": {
+          "name": "punctuation.equal.paradox"
+        }
+      },
+      "end": "(?=\\s*(?:#|$))",
+      "patterns": [
+        {
+          "include": "#localization-key-value"
+        }
+      ]
+    },
+    "localization-key-value": {
+      "match": "[A-Za-z0-9_][A-Za-z0-9_-]*(?:\\.[A-Za-z0-9_][A-Za-z0-9_-]*)+",
+      "name": "variable.other.identifier.paradox"
+    },
+    "quoted-localization-expression-assignment": {
+      "begin": "\\s*((?i:definition|replace_with))(\\s*)(\\?=|=)(\\s*)(\")",
+      "beginCaptures": {
+        "1": {
+          "name": "markup.bold support.constant.parameter.lhs.paradox"
+        },
+        "3": {
+          "name": "punctuation.equal.paradox"
+        },
+        "5": {
+          "name": "punctuation.definition.string.begin.paradox"
+        }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.paradox"
+        }
+      },
+      "name": "string.quoted.double.paradox",
+      "patterns": [
+        {
+          "include": "#quoted-localization-expression"
+        }
+      ]
+    },
+    "quoted-localization-expression": {
+      "patterns": [
+        {
+          "include": "#quoted-localization-string"
+        },
+        {
+          "include": "#quoted-localization-scope"
+        },
+        {
+          "include": "#quoted-localization-function-with-para"
+        },
+        {
+          "include": "#quoted-localization-function-without-para"
+        }
+      ]
+    },
+    "quoted-localization-string": {
+      "begin": "'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.paradox.loc"
+        }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.paradox.loc"
+        }
+      },
+      "name": "markup.italic string.quoted.single.paradox.loc",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.paradox.loc"
+        }
+      ]
+    },
+    "quoted-localization-parameters": {
+      "patterns": [
+        {
+          "include": "#quoted-localization-string"
+        },
+        {
+          "include": "#quoted-localization-scope"
+        },
+        {
+          "include": "#quoted-localization-function-with-para"
+        },
+        {
+          "include": "#quoted-localization-function-without-para"
+        }
+      ]
+    },
+    "quoted-localization-scope": {
+      "match": null,
+      "captures": {
+        "1": {
+          "name": "markup.italic support.variable.scope.builtin.paradox.loc support.variable.scope.paradox.loc"
+        },
+        "2": {
+          "name": "markup.italic support.variable.scope.paradox.loc"
+        }
+      }
+    },
+    "quoted-localization-function-without-para": {
+      "match": null,
+      "name": "meta.function.without-para.paradox.loc",
+      "captures": {
+        "1": {
+          "name": "markup.bold support.function.builtin.paradox.loc support.function.paradox.loc"
+        },
+        "2": {
+          "name": "markup.bold support.function.paradox.loc"
+        },
+        "3": {
+          "name": "markup.bold punctuation.separator.dot-access.paradox.loc"
+        }
+      }
+    },
+    "quoted-localization-function-with-para": {
+      "begin": null,
+      "beginCaptures": {
+        "1": {
+          "name": "markup.bold support.function.builtin.paradox.loc support.function.paradox.loc"
+        },
+        "2": {
+          "name": "markup.bold support.function.paradox.loc"
+        }
+      },
+      "end": "(?<=\\))",
+      "name": "meta.function.with-para.paradox.loc",
+      "patterns": [
+        {
+          "include": "#quoted-localization-parameters"
+        }
+      ]
+    },
+    "sound-string": {
+      "match": null,
+      "name": "markup.bold support.constant.parameter.rhs.paradox string.quoted.double.paradox"
+    }
+  }
+}

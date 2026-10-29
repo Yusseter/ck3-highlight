@@ -1,0 +1,431 @@
+{
+  "name": "Paradox Localization",
+  "scopeName": "source.paradox.loc",
+  "uuid": "24081801-bdcf-11ee-8002-44e517e8033d",
+  "injectionSelector": "L:string.quoted.double.paradox, L:string.quoted.double.yaml",
+  "patterns": [
+    {
+      "include": "#quote"
+    },
+    {
+      "include": "#data_type"
+    },
+    {
+      "include": "#format_color"
+    },
+    {
+      "include": "#complex-onclick"
+    },
+    {
+      "include": "#complex-tooltip"
+    },
+    {
+      "include": "#format"
+    },
+    {
+      "include": "#icon"
+    }
+  ],
+  "repository": {
+    "argument": {
+      "match": "(\\|)[\\w=%+\\-^]+",
+      "name": "markup.bold storage.modifier.paradox.loc",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.storage.modifier.begin.paradox.loc"
+        }
+      }
+    },
+    "concept": {
+      "match": "(?<=\\[)[a-z_]+(?=(?:\\|E)?\\])",
+      "name": "markup.italic support.variable.concept.paradox.loc"
+    },
+    "data_type": {
+      "begin": "\\[",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.data_types.begin.paradox.loc"
+        }
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.data_types.end.paradox.loc"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#concept"
+        },
+        {
+          "include": "#scope"
+        },
+        {
+          "include": "#function-with-para"
+        },
+        {
+          "include": "#function-without-para"
+        },
+        {
+          "include": "#argument"
+        }
+      ]
+    },
+    "color_components": {
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.braces.begin.paradox.loc"
+        }
+      },
+      "end": "\\}|(?=\"|#!)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.braces.end.paradox.loc"
+        }
+      },
+      "patterns": [
+        {
+          "match": "[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)\\b",
+          "name": "constant.numeric.float.paradox.loc"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.sequence.paradox.loc"
+        }
+      ]
+    },
+    "format_color": {
+      "begin": "(#)(color|glow_color)(:)(\\{[^}\\r\\n\"]*\\})",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.language.format.paradox.loc punctuation.definition.format.begin.paradox.loc"
+        },
+        "2": {
+          "name": "variable.language.format.paradox.loc"
+        },
+        "3": {
+          "name": "punctuation.separator.parameter.colon.paradox.loc"
+        },
+        "4": {
+          "patterns": [
+            {
+              "include": "#color_components"
+            }
+          ]
+        }
+      },
+      "end": "(?:#!)|(?=\")",
+      "endCaptures": {
+        "0": {
+          "name": "variable.language.format.paradox.loc punctuation.definition.format.end.paradox.loc"
+        }
+      },
+      "name": "markup.bold",
+      "patterns": [
+        {
+          "include": "source.paradox.localization.1.2#double-escape"
+        },
+        {
+          "match": "(;)(bold|italic|underline)\\b",
+          "captures": {
+            "1": {
+              "name": "punctuation.separator.parameter.semi-colon.paradox.loc"
+            },
+            "2": {
+              "name": "storage.modifier.paradox.loc"
+            }
+          }
+        },
+        {
+          "include": "source.paradox.loc"
+        }
+      ]
+    },
+    "format": {
+      "begin": "(#)[\\w;:{}.,-]+",
+      "beginCaptures": {
+        "0": {
+          "name": "variable.language.format.paradox.loc"
+        },
+        "1": {
+          "name": "punctuation.definition.format.begin.paradox.loc"
+        }
+      },
+      "end": "(?:#!)|(?=\")",
+      "endCaptures": {
+        "0": {
+          "name": "variable.language.format.paradox.loc punctuation.definition.format.end.paradox.loc"
+        }
+      },
+      "name": "markup.bold",
+      "patterns": [
+        {
+          "include": "source.paradox.localization.1.2#double-escape"
+        },
+        {
+          "include": "source.paradox.loc"
+        }
+      ]
+    },
+    "function-without-para": {
+      "match": null,
+      "name": "meta.function.without-para.paradox.loc",
+      "captures": {
+        "1": {
+          "name": "markup.bold support.function.builtin.paradox.loc support.function.paradox.loc"
+        },
+        "2": {
+          "name": "markup.bold support.function.paradox.loc"
+        },
+        "3": {
+          "name": "markup.bold punctuation.separator.dot-access.paradox.loc"
+        }
+      }
+    },
+    "function-with-para": {
+      "begin": null,
+      "beginCaptures": {
+        "1": {
+          "name": "markup.bold support.function.builtin.paradox.loc support.function.paradox.loc"
+        },
+        "2": {
+          "name": "markup.bold support.function.paradox.loc"
+        }
+      },
+      "end": "(?<=\\))",
+      "name": "meta.function.with-para.paradox.loc",
+      "patterns": [
+        {
+          "include": "#parameters"
+        }
+      ]
+    },
+    "icon": {
+      "match": "(@)\\w+(!)",
+      "name": "markup.italic entity.name.tag.icon.paradox.loc",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.icon.begin.paradox.loc"
+        },
+        "2": {
+          "name": "punctuation.definition.icon.end.paradox.loc"
+        }
+      }
+    },
+    "parameters": {
+      "begin": "\\(",
+      "beginCaptures": {
+        "0": {
+          "name": "markup.bold punctuation.definition.parameters.begin.paradox.loc"
+        }
+      },
+      "end": "\\)",
+      "applyEndPatternLast": true,
+      "endCaptures": {
+        "0": {
+          "name": "markup.bold punctuation.definition.parameters.end.paradox.loc"
+        }
+      },
+      "contentName": "meta.parameters.paradox.loc",
+      "patterns": [
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#scope"
+        },
+        {
+          "include": "#function-with-para"
+        },
+        {
+          "include": "#function-without-para"
+        }
+      ]
+    },
+    "quote": {
+      "match": "(\\$)([\\w|=%^.+-]+)(\\$)",
+      "name": "markup.italic variable.other.paradox.loc",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.variable.begin.paradox.loc"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#builtin-macro"
+            },
+            {
+              "include": "#argument"
+            }
+          ]
+        },
+        "3": {
+          "name": "punctuation.definition.variable.end.paradox.loc"
+        }
+      }
+    },
+    "builtin-macro": {
+      "match": {
+        "patternBuilder": "localization-token",
+        "fragments": "keywords/localization-builtin-macro.json"
+      },
+      "name": "markup.bolditalic"
+    },
+    "scope": {
+      "match": null,
+      "captures": {
+        "1": {
+          "name": "markup.italic support.variable.scope.builtin.paradox.loc support.variable.scope.paradox.loc"
+        },
+        "2": {
+          "name": "markup.italic support.variable.scope.paradox.loc"
+        }
+      }
+    },
+    "string": {
+      "begin": "'",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.paradox.loc"
+        }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.paradox.loc"
+        }
+      },
+      "name": "markup.italic string.quoted.single.paradox.loc",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.paradox.loc"
+        },
+        {
+          "include": "#type_conversion"
+        }
+      ]
+    },
+    "type_conversion": {
+      "match": "(\\()(\\w+)(\\))",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.type.begin.paradox.loc"
+        },
+        "2": {
+          "name": "support.type.paradox.loc"
+        },
+        "3": {
+          "name": "punctuation.definition.type.end.paradox.loc"
+        }
+      }
+    },
+    "complex-tooltip": {
+      "begin": "(#)((?i:tooltip))(:)",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.language.format.paradox.loc punctuation.definition.format.begin.paradox.loc"
+        },
+        "2": {
+          "name": "variable.language.format.paradox.loc"
+        },
+        "3": {
+          "name": "punctuation.separator.parameter.colon.paradox.loc"
+        }
+      },
+      "end": "(?:#!)|(?=\")",
+      "endCaptures": {
+        "0": {
+          "name": "variable.language.format.paradox.loc punctuation.definition.format.end.paradox.loc"
+        }
+      },
+      "name": "markup.bold",
+      "patterns": [
+        {
+          "include": "#quote"
+        },
+        {
+          "include": "#data_type"
+        },
+        {
+          "match": null,
+          "name": "markup.italic support.type.tooltip.paradox.loc"
+        },
+        {
+          "match": "\\|",
+          "name": "punctuation.separator.sequence.paradox.loc"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.sequence.paradox.loc"
+        },
+        {
+          "match": "\\b[A-Za-z0-9_][A-Za-z0-9_.-]*\\b",
+          "name": "variable.other.identifier.paradox.loc"
+        }
+      ]
+    },
+    "complex-onclick": {
+      "begin": "(#)((?i:onclick))(:)",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.language.format.paradox.loc punctuation.definition.format.begin.paradox.loc"
+        },
+        "2": {
+          "name": "variable.language.format.paradox.loc"
+        },
+        "3": {
+          "name": "punctuation.separator.parameter.colon.paradox.loc"
+        }
+      },
+      "end": "(?:#!)|(?=\")",
+      "endCaptures": {
+        "0": {
+          "name": "variable.language.format.paradox.loc punctuation.definition.format.end.paradox.loc"
+        }
+      },
+      "name": "markup.bold",
+      "patterns": [
+        {
+          "include": "#quote"
+        },
+        {
+          "include": "#data_type"
+        },
+        {
+          "include": "#format_color"
+        },
+        {
+          "include": "#complex-tooltip"
+        },
+        {
+          "include": "#format"
+        },
+        {
+          "include": "#icon"
+        },
+        {
+          "match": null,
+          "name": "markup.italic support.type.onclick.paradox.loc"
+        },
+        {
+          "match": "\\|",
+          "name": "punctuation.separator.sequence.paradox.loc"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.sequence.paradox.loc"
+        },
+        {
+          "match": "\\b[A-Za-z0-9_][A-Za-z0-9_.-]*\\b(?=(?:\\s|#!|\"))",
+          "name": "variable.other.identifier.paradox.loc entity.name.reference.localization.paradox.loc"
+        },
+        {
+          "match": "\\b[A-Za-z0-9_][A-Za-z0-9_.-]*\\b",
+          "name": "variable.other.identifier.paradox.loc"
+        }
+      ]
+    }
+  }
+}

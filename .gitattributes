@@ -1,0 +1,23 @@
+# Default
+* text=auto
+
+# Text files
+*.js text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+.editorconfig text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.vscodeignore text eol=lf
+.prettierignore text eol=lf
+LICENSE text eol=lf
+
+# Binary files
+*.png binary
+*.zip binary
+*.vsix binary

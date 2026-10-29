@@ -1,6 +1,25 @@
-.vscode/**
-.vscode-test/**
-.gitignore
-vsc-extension-quickstart.md
-yaml/**
-upstream_source_index.csv
+# Default: exclude development sources, tools, tests and local output
+**
+
+# Package metadata and user documentation
+!package.json
+!README.md
+!CHANGELOG.md
+
+# Project and upstream licensing
+!LICENSE
+!LICENSE.txt
+!LICENSE.md
+!NOTICE.md
+!licenses/**
+
+# Extension artwork
+!icons/**
+
+# Runtime code and compiled grammars
+!src/**
+!syntaxes/**
+
+# Language editing configuration
+!language-configuration.json
+!localization-language-configuration.json

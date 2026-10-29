@@ -1,0 +1,132 @@
+{
+  "name": "CK3",
+  "scopeName": "source.paradox.ck3",
+  "uuid": "24081801-bdcf-11ee-8001-44e517e8033d",
+  "injections": {
+    "L:meta.id.paradox.comparable.prefixed - string.quoted.double.paradox - string.quoted.single.paradox - comment.line.number-sign.paradox": {
+      "patterns": [
+        {
+          "include": "#triggers"
+        },
+        {
+          "include": "#effects"
+        },
+        {
+          "include": "#modifiers"
+        },
+        {
+          "include": "#event_targets"
+        },
+        {
+          "include": "#scopes"
+        }
+      ]
+    },
+    "L:meta.id.paradox.rhs.comparable.prefixed - string.quoted.double.paradox - string.quoted.single.paradox - comment.line.number-sign.paradox": {
+      "patterns": [
+        {
+          "include": "#triggers"
+        },
+        {
+          "include": "#event_targets"
+        },
+        {
+          "include": "#scopes"
+        }
+      ]
+    },
+    "L:meta.scope.paradox - string.quoted.double.paradox - string.quoted.single.paradox - comment.line.number-sign.paradox": {
+      "patterns": [
+        {
+          "include": "#event_targets"
+        },
+        {
+          "include": "#scopes"
+        }
+      ]
+    },
+    "L:meta.id.paradox.rhs.non-comparable.non-prefixed - string.quoted.double.paradox - string.quoted.single.paradox - comment.line.number-sign.paradox": {
+      "patterns": [
+        {
+          "include": "#event_targets"
+        },
+        {
+          "include": "#scopes"
+        }
+      ]
+    },
+    "L:meta.id.paradox.non-comparable.non-prefixed - string.quoted.double.paradox - string.quoted.single.paradox - comment.line.number-sign.paradox": {
+      "patterns": [
+        {
+          "include": "#event_targets"
+        },
+        {
+          "include": "#scopes"
+        }
+      ]
+    }
+  },
+  "patterns": [
+    {
+      "include": "source.paradox"
+    }
+  ],
+  "repository": {
+    "effects": {
+      "comment": "Effects",
+      "match": {
+        "patternBuilder": "whole-word",
+        "fragments": "keywords/ck3-effects.json"
+      },
+      "name": "markup.bold support.function.effect.paradox.ck3"
+    },
+    "event_targets": {
+      "comment": "Event targets",
+      "match": {
+        "patternBuilder": "event-target",
+        "fragments": "keywords/ck3-event-targets.json"
+      },
+      "name": "markup.bold",
+      "captures": {
+        "1": {
+          "name": "support.type.scope.event_target.paradox.ck3"
+        },
+        "2": {
+          "name": "support.type.scope.event_target.paradox.ck3 punctuation.definition.event_target.paradox.ck3"
+        },
+        "3": {
+          "name": "variable.parameter.event_target.paradox.ck3",
+          "patterns": [
+            {
+              "include": "source.paradox#macro"
+            }
+          ]
+        }
+      }
+    },
+    "modifiers": {
+      "comment": "Modifiers",
+      "match": {
+        "patternBuilder": "whole-word",
+        "fragments": "keywords/ck3-modifiers.json"
+      },
+      "name": "markup.bold support.type.modifier.paradox.ck3"
+    },
+    "scopes": {
+      "comment": "Normal scopes",
+      "match": {
+        "patternBuilder": "scope-word",
+        "fragments": "keywords/ck3-scopes.json"
+      },
+      "name": "markup.bold support.type.scope.paradox.ck3"
+    },
+    "triggers": {
+      "comment": "Triggers",
+      "match": {
+        "patternBuilder": "whole-word",
+        "fragments": "keywords/ck3-triggers.json"
+      },
+      "name": "markup.bold support.function.trigger.paradox.ck3"
+    }
+  }
+}

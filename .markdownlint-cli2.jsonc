@@ -1,0 +1,12 @@
+{
+  "config": {
+    "MD013": false
+  },
+  "ignores": [
+    "node_modules/**",
+    ".cache/**",
+    "dist/**",
+    "docs/development/**",
+    "LICENSE"
+  ]
+}

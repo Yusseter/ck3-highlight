@@ -1,0 +1,14 @@
+# Dependencies, local records and package output
+node_modules/
+.cache/
+dist/
+docs/development/
+
+# Generated grammars/feeds are formatted by their generators
+generated/
+syntaxes/
+
+# Preserve third-party notices and package-manager output
+licenses/
+LICENSE
+pnpm-lock.yaml
