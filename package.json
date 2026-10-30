@@ -1,7 +1,7 @@
 {
-  "name": "ck3-highlight",
-  "displayName": "Crusader Kings III Highlight",
-  "description": "Syntax highlighting, script formatting and parameter highlighting for Crusader Kings III scripts and localization.",
+  "name": "ck3-syntax",
+  "displayName": "CK3 Syntax",
+  "description": "Syntax highlighting for Crusader Kings III scripts, GUI files and localization, with script formatting and semantic parameter highlighting.",
   "version": "0.0.4",
   "license": "GPL-3.0-or-later",
   "publisher": "Yusseter",
@@ -31,14 +31,14 @@
     "semantic-highlighting"
   ],
   "bugs": {
-    "url": "https://github.com/Yusseter/ck3-highlight/issues"
+    "url": "https://github.com/Yusseter/ck3-syntax/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Yusseter/ck3-highlight.git"
+    "url": "https://github.com/Yusseter/ck3-syntax.git"
   },
-  "homepage": "https://github.com/Yusseter/ck3-highlight",
-  "qna": "https://github.com/Yusseter/ck3-highlight/issues",
+  "homepage": "https://github.com/Yusseter/ck3-syntax",
+  "qna": "https://github.com/Yusseter/ck3-syntax/issues",
   "packageManager": "pnpm@11.25.0",
   "scripts": {
     "format": "prettier --write .",
@@ -76,7 +76,7 @@
   },
   "contributes": {
     "configuration": {
-      "title": "Crusader Kings III Highlight",
+      "title": "CK3 Syntax",
       "properties": {
         "ck3Highlight.autoDetect": {
           "type": "boolean",

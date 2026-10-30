@@ -1,6 +1,6 @@
-# Crusader Kings III Highlight
+# CK3 Syntax
 
-Syntax highlighting and editing support for Crusader Kings III in VS Code 1.107 or newer.
+Syntax highlighting for Crusader Kings III scripts, GUI files and localization, with script formatting and semantic parameter highlighting. Requires VS Code 1.107 or newer.
 
 ## Features
 

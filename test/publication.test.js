@@ -5,6 +5,8 @@ const path = require('node:path');
 
 test('repository and user-facing metadata describe the same extension', () => {
   const manifest = require('../package.json');
+  assert.equal(manifest.name, 'ck3-syntax');
+  assert.equal(manifest.displayName, 'CK3 Syntax');
   const repository = manifest.repository.url.replace(/\.git$/, '');
   assert.equal(
     repository,

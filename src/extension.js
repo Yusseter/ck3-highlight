@@ -15,7 +15,7 @@ function fullDocumentRange(document) {
 }
 
 function activate(context) {
-  const output = vscode.window.createOutputChannel('CK3 Highlight');
+  const output = vscode.window.createOutputChannel('CK3 Syntax');
   const semanticService = new ScriptedSemanticService(context);
   context.subscriptions.push(output, semanticService);
   let semanticStarted = false;

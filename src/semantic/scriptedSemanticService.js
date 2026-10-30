@@ -269,7 +269,7 @@ class ScriptedSemanticService {
     } catch (error) {
       if (this.disposed || revision !== this.revision) return;
       this.currentIndex = null;
-      const message = `CK3 Highlight semantic index: ${error.message}`;
+      const message = `CK3 Syntax semantic index: ${error.message}`;
       if (message !== this.lastError) {
         this.lastError = message;
         void vscode.window.showWarningMessage(message);
