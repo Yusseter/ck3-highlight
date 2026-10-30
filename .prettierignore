@@ -8,6 +8,9 @@ docs/development/
 # Release output
 dist/
 
+# Release notes
+docs/releases/
+
 # Generated files
 generated/
 syntaxes/
