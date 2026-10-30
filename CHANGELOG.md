@@ -3,7 +3,7 @@
 ## 0.0.4
 
 - Rename the extension to CK3 Syntax (`Yusseter.ck3-syntax`); preserve CK3 language IDs, settings and formatter command compatibility.
-- Replace the temporary mod icon with attributed MIT-licensed artwork from Paradox Modding Tools; keep all active artwork under `icons/`.
+- Replace the temporary mod icon with attributed MIT-licensed artwork from Paradox Modding Tools, resized to 256x256 pixels for Marketplace compatibility; keep all active artwork under `icons/`.
 - Limit supported language modes to CK3 script and CK3 Localization; remove associations and editing providers for other games and generic Paradox mode.
 - Standardize language names/IDs as CK3 Script (`ck3`) and CK3 Localization (`ck3-localization`), with light/dark file icons for both.
 - Keep grammar rules and keyword lists in readable source files with an offline build; package only the compiled TextMate grammars.

@@ -109,6 +109,10 @@ test('extension artwork is an attributed square PNG under icons', () => {
   assert.equal(data.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
   assert.equal(data.readUInt32BE(16), data.readUInt32BE(20));
   assert(data.readUInt32BE(16) >= 128);
+  assert(
+    data.readUInt32BE(16) <= 1024,
+    'Marketplace extension icons must not exceed 1024x1024 pixels',
+  );
   const license = fs.readFileSync(
     path.resolve(__dirname, '..', 'licenses/ParadoxModdingTools-MIT.txt'),
     'utf8',

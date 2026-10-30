@@ -49,6 +49,6 @@ CK3 keyword and localization tables, including function/type relationships, are 
 
 ## Artwork
 
-The extension icon `icons/icon.png` is an unchanged copy of `frontend/src/assets/PMT-SquareIcon-Mint.png` from [Paradox Modding Tools](https://github.com/idodavis/paradox-modding-tools/blob/592de33034ffffd2beed64ccd95a6620051f03ad/frontend/src/assets/PMT-SquareIcon-Mint.png), revision `592de33034ffffd2beed64ccd95a6620051f03ad`. Copyright (c) 2025 Ian Davis. It is distributed under the upstream MIT license, retained in `licenses/ParadoxModdingTools-MIT.txt`. Reusing this artwork does not imply affiliation with or endorsement by Paradox Modding Tools.
+The extension icon `icons/icon.png` is a copy of `frontend/src/assets/PMT-SquareIcon-Mint.png` from [Paradox Modding Tools](https://github.com/idodavis/paradox-modding-tools/blob/592de33034ffffd2beed64ccd95a6620051f03ad/frontend/src/assets/PMT-SquareIcon-Mint.png), revision `592de33034ffffd2beed64ccd95a6620051f03ad`, resized to 256x256 pixels for the Visual Studio Marketplace. Copyright (c) 2025 Ian Davis. It is distributed under the upstream MIT license, retained in `licenses/ParadoxModdingTools-MIT.txt`. Reusing this artwork does not imply affiliation with or endorsement by Paradox Modding Tools.
 
 The language-icon PNG variants `icons/paradox-light.png` and `icons/paradox-dark.png` were prepared by Yusseter and depict the Paradox logo. The Paradox Interactive name and logo belong to Paradox Interactive. Their use does not imply affiliation with or endorsement by Paradox Interactive.
